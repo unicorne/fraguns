@@ -2,6 +2,7 @@
 
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
+import { getMemberForGroup } from "@/lib/storage";
 import PollResults from "@/components/results/PollResults";
 import TextResults from "@/components/results/TextResults";
 import ScaleResults from "@/components/results/ScaleResults";
@@ -30,18 +31,34 @@ export default function FrageErgebnisse({
   const { inviteCode, questionId } = use(params);
   const router = useRouter();
   const [results, setResults] = useState<ResultsData | null>(null);
+  const [memberId, setMemberId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    async function init() {
+      const res = await fetch(`/api/groups/${inviteCode}`);
+      if (!res.ok) return;
+      const group = await res.json();
+      const stored = getMemberForGroup(group.id);
+      if (stored) {
+        setMemberId(stored.memberId);
+      }
+    }
+    init();
+  }, [inviteCode]);
+
+  useEffect(() => {
+    if (!memberId) return;
     fetchResults();
-    // Poll every 10s for new answers
     const interval = setInterval(fetchResults, 10000);
     return () => clearInterval(interval);
-  }, [questionId]);
+  }, [questionId, memberId]);
 
   async function fetchResults() {
     try {
-      const res = await fetch(`/api/questions/${questionId}/results`);
+      const res = await fetch(
+        `/api/questions/${questionId}/results?member_id=${memberId}`
+      );
       if (res.ok) {
         setResults(await res.json());
       }
@@ -83,19 +100,14 @@ export default function FrageErgebnisse({
       {!results.revealed ? (
         <div className="bg-card rounded-xl border border-card-border p-6 text-center">
           <p className="text-muted mb-3">
-            Warte auf alle Antworten ({results.answered?.length || 0}/
-            {results.total})
+            Du musst zuerst antworten, um die Ergebnisse zu sehen.
           </p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {results.answered?.map((name) => (
-              <span
-                key={name}
-                className="px-3 py-1 rounded-full bg-accent/20 text-accent text-sm"
-              >
-                {name}
-              </span>
-            ))}
-          </div>
+          <button
+            onClick={() => router.push(`/gruppe/${inviteCode}`)}
+            className="text-sm text-accent hover:text-accent-light"
+          >
+            Zur Frage
+          </button>
         </div>
       ) : (
         <div className="bg-card rounded-xl border border-card-border p-6">
@@ -116,6 +128,10 @@ export default function FrageErgebnisse({
               config={results.question.config}
             />
           )}
+
+          <p className="text-xs text-muted mt-4 text-center">
+            {results.answers?.length || 0} von {results.total} haben geantwortet
+          </p>
         </div>
       )}
     </div>

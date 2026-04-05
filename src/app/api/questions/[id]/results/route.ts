@@ -2,12 +2,14 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase-server";
 
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
+  const { searchParams } = new URL(request.url);
+  const memberId = searchParams.get("member_id");
 
-  // Get question with answers and group member count
+  // Get question with answers
   const { data: question, error } = await supabaseAdmin
     .from("questions")
     .select("*, answers(*, members:member_id(id, name))")
@@ -24,16 +26,14 @@ export async function GET(
     .select("*", { count: "exact", head: true })
     .eq("group_id", question.group_id);
 
-  const answerCount = question.answers?.length || 0;
-  const allAnswered = answerCount >= (memberCount || 0);
-  const deadlinePassed = question.deadline
-    ? new Date() > new Date(question.deadline)
+  // Reveal results if this member has answered
+  const memberHasAnswered = memberId
+    ? question.answers?.some(
+        (a: { members: { id: string } }) => a.members.id === memberId
+      )
     : false;
 
-  const canReveal = allAnswered || deadlinePassed;
-
-  if (!canReveal) {
-    // Return only who has answered, not what they answered
+  if (!memberHasAnswered) {
     const answered = question.answers?.map(
       (a: { members: { name: string } }) => a.members.name
     ) || [];

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(vercel link:*)",
+      "Bash(vercel env:*)",
+      "Bash(vercel --prod)",
+      "Bash(printf '%s' \"18085d270a6bb6e30520b590809f4f0135edb158114b4cd72280603730059912\")",
+      "Bash(git commit -m ':*)"
+    ]
+  }
+}

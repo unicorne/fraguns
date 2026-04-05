@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase-server";
+import { defaultQuestions } from "@/lib/default-questions";
 
 function generateInviteCode(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
@@ -28,6 +29,16 @@ export async function POST(request: Request) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  // Seed default questions for the new group
+  const questionsToInsert = defaultQuestions.map((q) => ({
+    group_id: data.id,
+    text: q.text,
+    type: q.type,
+    config: q.config,
+  }));
+
+  await supabaseAdmin.from("questions").insert(questionsToInsert);
 
   return NextResponse.json(data);
 }
