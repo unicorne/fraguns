@@ -1,11 +1,7 @@
 const CACHE_NAME = "fraguns-v1";
-const PRECACHE_URLS = ["/", "/gruppe/erstellen"];
 
-// Install: precache shell
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS))
-  );
+// Install: skip waiting (no precache — Next.js pages are dynamic)
+self.addEventListener("install", () => {
   self.skipWaiting();
 });
 
