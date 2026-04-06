@@ -50,6 +50,15 @@ export default function GruppePage({
 
   useEffect(() => {
     fetchGroup();
+
+    // Re-check for new questions when app becomes visible (e.g. after push notification)
+    function onVisibilityChange() {
+      if (document.visibilityState === "visible") {
+        fetchGroup();
+      }
+    }
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
   }, [inviteCode]);
 
   async function fetchGroup() {
