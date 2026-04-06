@@ -17,6 +17,9 @@ export default function Home() {
   const router = useRouter();
   const [user, setUser] = useState<UserInfo | null>(null);
   const [groups, setGroups] = useState<MemberInfo[]>([]);
+  const [groupStatus, setGroupStatus] = useState<
+    Record<string, boolean>
+  >({});
   const [username, setUsername] = useState("");
   const [inviteCode, setInviteCode] = useState("");
   const [mode, setMode] = useState<"loading" | "register" | "push-prompt" | "dashboard">(
@@ -32,10 +35,27 @@ export default function Home() {
       setUser(stored);
       setGroups(getAllGroups());
       setMode("dashboard");
+      fetchGroupStatus(stored.userId);
     } else {
       setMode("register");
     }
   }, []);
+
+  async function fetchGroupStatus(userId: string) {
+    try {
+      const res = await fetch(`/api/users/groups?user_id=${userId}`);
+      if (res.ok) {
+        const data = await res.json();
+        const status: Record<string, boolean> = {};
+        for (const g of data) {
+          status[g.groupId] = g.hasUnanswered;
+        }
+        setGroupStatus(status);
+      }
+    } catch {
+      // Silent fail
+    }
+  }
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
@@ -225,7 +245,7 @@ export default function Home() {
               <button
                 key={g.groupId}
                 onClick={() => router.push(`/gruppe/${g.inviteCode}`)}
-                className="w-full bg-card rounded-2xl border border-card-border p-4 text-left shadow-sm active:scale-[0.98]"
+                className="w-full bg-card rounded-2xl border border-card-border p-4 text-left shadow-sm active:scale-[0.98] relative"
               >
                 <div className="flex items-center gap-3">
                   <AvatarGroup names={[g.memberName]} size="md" />
@@ -237,6 +257,9 @@ export default function Home() {
                       als {g.memberName}
                     </p>
                   </div>
+                  {groupStatus[g.groupId] && (
+                    <span className="w-3 h-3 rounded-full bg-orange shrink-0" />
+                  )}
                 </div>
               </button>
             ))}

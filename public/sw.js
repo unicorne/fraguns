@@ -55,14 +55,18 @@ self.addEventListener("push", (event) => {
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
   const url = event.notification.data?.url || "/";
+  const fullUrl = self.location.origin + url;
+
   event.waitUntil(
     self.clients.matchAll({ type: "window" }).then((clients) => {
+      // If app is already open, navigate it to the right page
       for (const client of clients) {
-        if (client.url.includes(self.location.origin) && "focus" in client) {
-          return client.focus();
+        if ("navigate" in client) {
+          return client.navigate(fullUrl).then((c) => c && c.focus());
         }
       }
-      return self.clients.openWindow(url);
+      // Otherwise open a new window
+      return self.clients.openWindow(fullUrl);
     })
   );
 });
