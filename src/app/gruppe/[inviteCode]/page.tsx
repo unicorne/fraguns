@@ -236,9 +236,9 @@ export default function GruppePage({
           </div>
           <button
             onClick={() => setShowInvite(!showInvite)}
-            className="text-white/70 text-sm hover:text-white"
+            className="text-white bg-white/20 text-sm font-semibold px-3 py-1.5 rounded-xl hover:bg-white/30"
           >
-            +
+            Einladen
           </button>
         </div>
 
@@ -265,21 +265,17 @@ export default function GruppePage({
 
       {/* Invite bar */}
       {showInvite && (
-        <div className="mx-4 -mt-4 mb-2 p-3 rounded-2xl bg-card border border-card-border shadow-sm z-10 relative">
-          <p className="text-xs text-muted mb-2">Einladungslink:</p>
-          <div className="flex gap-2">
-            <input
-              readOnly
-              value={`${typeof window !== "undefined" ? window.location.origin : ""}/gruppe/${group.invite_code}`}
-              className="flex-1 text-xs bg-background rounded-xl px-3 py-2 text-foreground border border-card-border"
-            />
+        <div className="mx-4 -mt-4 mb-4 p-4 rounded-2xl bg-card border border-card-border shadow-md z-20 relative">
+          <p className="text-xs text-muted mb-2">Einladungscode:</p>
+          <div className="flex gap-2 items-center">
+            <span className="flex-1 text-lg font-bold tracking-widest text-foreground text-center">
+              {group.invite_code}
+            </span>
             <button
               onClick={() => {
-                navigator.clipboard.writeText(
-                  `${window.location.origin}/gruppe/${group.invite_code}`
-                );
+                navigator.clipboard.writeText(group.invite_code);
               }}
-              className="text-xs px-3 py-2 rounded-xl bg-accent text-white font-medium"
+              className="text-sm px-4 py-2 rounded-xl bg-accent text-white font-semibold"
             >
               Kopieren
             </button>
