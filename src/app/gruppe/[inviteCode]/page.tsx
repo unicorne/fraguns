@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
-import { getMemberForGroup, storeMember } from "@/lib/storage";
+import { getMemberForGroup, storeMember, getStoredUser } from "@/lib/storage";
 import Navigation from "@/components/Navigation";
 import QuestionCard from "@/components/QuestionCard";
 import { AvatarGroup } from "@/components/Avatar";
@@ -91,14 +91,24 @@ export default function GruppePage({
 
   async function handleJoin(e: React.FormEvent) {
     e.preventDefault();
-    if (!memberName.trim() || !group) return;
+    const storedUser = getStoredUser();
+    const nameToUse = storedUser?.username || memberName.trim();
+    if (!nameToUse || !group) return;
 
     setJoining(true);
     try {
+      const body: Record<string, string> = {
+        name: nameToUse,
+        group_id: group.id,
+      };
+      if (storedUser?.userId) {
+        body.user_id = storedUser.userId;
+      }
+
       const res = await fetch("/api/members", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: memberName.trim(), group_id: group.id }),
+        body: JSON.stringify(body),
       });
       const member = await res.json();
       if (!res.ok) throw new Error(member.error);
@@ -152,26 +162,53 @@ export default function GruppePage({
 
         <div className="px-6 -mt-4">
           <div className="bg-card rounded-2xl border border-card-border p-5 shadow-sm">
-            <p className="text-sm text-muted mb-4 text-center">
-              Tritt der Gruppe bei
-            </p>
-            <form onSubmit={handleJoin} className="flex flex-col gap-3">
-              <input
-                type="text"
-                placeholder="Dein Name"
-                value={memberName}
-                onChange={(e) => setMemberName(e.target.value)}
-                className="h-12 rounded-2xl bg-background border border-card-border px-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent"
-                autoFocus
-              />
-              <button
-                type="submit"
-                disabled={joining || !memberName.trim()}
-                className="h-12 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
-              >
-                {joining ? "Beitreten..." : "Gruppe beitreten"}
-              </button>
-            </form>
+            {(() => {
+              const storedUser = getStoredUser();
+              if (storedUser) {
+                // User is logged in — auto-join with their username
+                return (
+                  <>
+                    <p className="text-sm text-muted mb-4 text-center">
+                      Beitreten als <span className="font-semibold text-foreground">@{storedUser.username}</span>
+                    </p>
+                    <form onSubmit={handleJoin}>
+                      <button
+                        type="submit"
+                        disabled={joining}
+                        className="w-full h-12 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
+                      >
+                        {joining ? "Beitreten..." : "Gruppe beitreten"}
+                      </button>
+                    </form>
+                  </>
+                );
+              }
+              // No user — show name input (fallback, shouldn't happen normally)
+              return (
+                <>
+                  <p className="text-sm text-muted mb-4 text-center">
+                    Tritt der Gruppe bei
+                  </p>
+                  <form onSubmit={handleJoin} className="flex flex-col gap-3">
+                    <input
+                      type="text"
+                      placeholder="Dein Name"
+                      value={memberName}
+                      onChange={(e) => setMemberName(e.target.value)}
+                      className="h-12 rounded-2xl bg-background border border-card-border px-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent"
+                      autoFocus
+                    />
+                    <button
+                      type="submit"
+                      disabled={joining || !memberName.trim()}
+                      className="h-12 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
+                    >
+                      {joining ? "Beitreten..." : "Gruppe beitreten"}
+                    </button>
+                  </form>
+                </>
+              );
+            })()}
           </div>
         </div>
       </div>

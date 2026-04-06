@@ -30,12 +30,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  // Seed default questions for the new group
-  const questionsToInsert = defaultQuestions.map((q) => ({
+  // Seed default questions — first one is immediately active
+  const today = new Date().toISOString().split("T")[0];
+  const deadline = new Date(`${today}T22:59:00Z`).toISOString();
+
+  const questionsToInsert = defaultQuestions.map((q, i) => ({
     group_id: data.id,
     text: q.text,
     type: q.type,
     config: q.config,
+    ...(i === 0
+      ? { is_active: true, scheduled_date: today, deadline }
+      : {}),
   }));
 
   await supabaseAdmin.from("questions").insert(questionsToInsert);

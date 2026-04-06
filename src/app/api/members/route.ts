@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase-server";
 
 export async function POST(request: Request) {
-  const { name, group_id } = await request.json();
+  const { name, group_id, user_id } = await request.json();
 
   if (!name?.trim() || !group_id) {
     return NextResponse.json(
@@ -11,15 +11,23 @@ export async function POST(request: Request) {
     );
   }
 
+  const insertData: Record<string, unknown> = {
+    name: name.trim(),
+    group_id,
+  };
+  if (user_id) {
+    insertData.user_id = user_id;
+  }
+
   const { data, error } = await supabaseAdmin
     .from("members")
-    .insert({ name: name.trim(), group_id })
+    .insert(insertData)
     .select()
     .single();
 
   if (error) {
     if (error.code === "23505") {
-      // Unique violation - name already exists in group
+      // Name already exists in group — return existing + update user_id if needed
       const { data: existing } = await supabaseAdmin
         .from("members")
         .select()
@@ -28,6 +36,12 @@ export async function POST(request: Request) {
         .single();
 
       if (existing) {
+        if (user_id && !existing.user_id) {
+          await supabaseAdmin
+            .from("members")
+            .update({ user_id })
+            .eq("id", existing.id);
+        }
         return NextResponse.json(existing);
       }
     }
