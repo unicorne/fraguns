@@ -69,9 +69,9 @@ export async function GET(request: Request) {
     try {
       const webpush = await import("web-push");
       webpush.setVapidDetails(
-        process.env.VAPID_SUBJECT!,
-        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-        process.env.VAPID_PRIVATE_KEY!
+        process.env.VAPID_SUBJECT!.trim(),
+        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!.trim().replace(/=+$/, ""),
+        process.env.VAPID_PRIVATE_KEY!.trim().replace(/=+$/, "")
       );
 
       const payload = JSON.stringify({
