@@ -186,7 +186,12 @@ export default function Home() {
           <h1 className="text-3xl font-bold text-white tracking-tight">
             FragUns
           </h1>
-          <span className="text-white/70 text-sm">@{user?.username}</span>
+          <button
+            onClick={() => router.push("/profil")}
+            className="text-white/70 text-sm hover:text-white"
+          >
+            @{user?.username}
+          </button>
         </div>
       </div>
 
