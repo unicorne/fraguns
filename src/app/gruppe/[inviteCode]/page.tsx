@@ -4,6 +4,7 @@ import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { getMemberForGroup, storeMember, getStoredUser } from "@/lib/storage";
 import QuestionCard from "@/components/QuestionCard";
+import PushPermission from "@/components/PushPermission";
 import { AvatarGroup } from "@/components/Avatar";
 import Countdown from "@/components/Countdown";
 
@@ -313,6 +314,22 @@ export default function GruppePage({
             Verlauf
           </button>
         </div>
+
+        {/* Push notification prompt */}
+        <PushPermission memberId={currentMember.memberId} />
+
+        {/* Test: manually trigger next question */}
+        <button
+          onClick={async () => {
+            await fetch("/api/cron/daily", {
+              headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_CRON_SECRET}` },
+            });
+            window.location.reload();
+          }}
+          className="w-full h-9 rounded-2xl bg-orange/20 text-orange text-xs font-semibold mt-4 active:scale-[0.98]"
+        >
+          Test: Nächste Frage aktivieren
+        </button>
       </main>
     </div>
   );

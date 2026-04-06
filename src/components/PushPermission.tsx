@@ -53,22 +53,23 @@ export default function PushPermission({ memberId }: PushPermissionProps) {
   if (!supported || subscribed || dismissed) return null;
 
   return (
-    <div className="bg-card rounded-xl border border-card-border p-4 mb-4">
-      <p className="text-sm mb-3">
-        Möchtest du täglich an neue Fragen erinnert werden?
+    <div className="bg-card rounded-2xl border border-card-border p-4 shadow-sm mt-4">
+      <p className="text-sm font-medium mb-1">Benachrichtigungen</p>
+      <p className="text-xs text-muted mb-3">
+        Werde erinnert wenn eine neue Frage kommt
       </p>
       <div className="flex gap-2">
         <button
           onClick={subscribe}
-          className="flex-1 py-2 rounded-xl bg-accent text-white text-sm font-medium"
+          className="flex-1 h-10 rounded-2xl bg-accent text-white text-sm font-semibold hover:bg-accent-dark"
         >
-          Ja, erinnere mich
+          Aktivieren
         </button>
         <button
           onClick={() => setDismissed(true)}
-          className="py-2 px-4 rounded-xl text-sm text-muted"
+          className="h-10 px-4 rounded-2xl text-sm text-muted bg-background border border-card-border"
         >
-          Nein
+          Später
         </button>
       </div>
     </div>
