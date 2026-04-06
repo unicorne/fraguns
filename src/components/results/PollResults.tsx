@@ -6,9 +6,10 @@ interface PollResultsProps {
     members: { name: string };
   }>;
   config: Record<string, unknown>;
+  groupMembers?: { id: string; name: string }[];
 }
 
-export default function PollResults({ answers, config }: PollResultsProps) {
+export default function PollResults({ answers, config, groupMembers }: PollResultsProps) {
   const voteCounts: Record<string, { count: number; voters: string[] }> = {};
   const customOptions = config.options as string[] | undefined;
 
@@ -28,6 +29,9 @@ export default function PollResults({ answers, config }: PollResultsProps) {
 
   const getLabel = (key: string) => {
     if (customOptions?.includes(key)) return key;
+    // Resolve member UUID to name
+    const member = groupMembers?.find((m) => m.id === key);
+    if (member) return member.name;
     return key;
   };
 

@@ -107,6 +107,7 @@ export default function QuestionCard({
           <PollResults
             answers={results.answers || []}
             config={question.config}
+            groupMembers={members}
           />
         )}
         {question.type === "text" && (

@@ -32,6 +32,7 @@ export default function FrageErgebnisse({
   const router = useRouter();
   const [results, setResults] = useState<ResultsData | null>(null);
   const [memberId, setMemberId] = useState<string | null>(null);
+  const [groupMembers, setGroupMembers] = useState<{ id: string; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function FrageErgebnisse({
       const res = await fetch(`/api/groups/${inviteCode}`);
       if (!res.ok) return;
       const group = await res.json();
+      setGroupMembers(group.members || []);
       const stored = getMemberForGroup(group.id);
       if (stored) {
         setMemberId(stored.memberId);
@@ -122,6 +124,7 @@ export default function FrageErgebnisse({
               <PollResults
                 answers={results.answers || []}
                 config={results.question.config}
+                groupMembers={groupMembers}
               />
             )}
             {results.question.type === "text" && (
