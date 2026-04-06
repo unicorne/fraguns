@@ -353,18 +353,6 @@ export default function GruppePage({
           </button>
         </div>
 
-        {/* Test: manually trigger next question */}
-        <button
-          onClick={async () => {
-            await fetch("/api/cron/daily", {
-              headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_CRON_SECRET}` },
-            });
-            window.location.reload();
-          }}
-          className="w-full h-9 rounded-2xl bg-orange/20 text-orange text-xs font-semibold mt-4 active:scale-[0.98]"
-        >
-          Test: Nächste Frage aktivieren
-        </button>
       </main>
     </div>
   );
