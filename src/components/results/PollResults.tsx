@@ -28,10 +28,10 @@ export default function PollResults({ answers, config, groupMembers }: PollResul
   );
 
   const getLabel = (key: string) => {
-    if (customOptions?.includes(key)) return key;
-    // Resolve member UUID to name
+    // Try to resolve as member UUID first
     const member = groupMembers?.find((m) => m.id === key);
     if (member) return member.name;
+    // Otherwise it's a custom text option
     return key;
   };
 
