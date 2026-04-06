@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getStoredUser } from "@/lib/storage";
+import { getStoredUser, storeUser, setAllMembers } from "@/lib/storage";
 import Avatar, { AvatarData } from "@/components/Avatar";
 
 export default function Einstellungen() {
@@ -11,6 +11,10 @@ export default function Einstellungen() {
     null
   );
   const [avatarData, setAvatarData] = useState<AvatarData>({});
+  const [newName, setNewName] = useState("");
+  const [editingName, setEditingName] = useState(false);
+  const [renameError, setRenameError] = useState("");
+  const [renaming, setRenaming] = useState(false);
   const [pushStatus, setPushStatus] = useState<
     "loading" | "unsupported" | "needs-pwa" | "denied" | "off" | "on"
   >("loading");
@@ -114,6 +118,60 @@ export default function Einstellungen() {
     setPushStatus("off");
   }
 
+  async function handleRename(e: React.FormEvent) {
+    e.preventDefault();
+    if (!newName.trim() || !user) return;
+    setRenaming(true);
+    setRenameError("");
+
+    try {
+      const res = await fetch("/api/users/rename", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: user.userId, new_username: newName }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setRenameError(data.error);
+        return;
+      }
+
+      // Update localStorage
+      storeUser({ userId: user.userId, username: data.username });
+      setUser({ userId: user.userId, username: data.username });
+
+      // Refresh memberships in localStorage
+      const groupsRes = await fetch(
+        `/api/users?username=${encodeURIComponent(data.username)}`
+      );
+      const groupsData = await groupsRes.json();
+      if (groupsData.memberships) {
+        setAllMembers(
+          groupsData.memberships.map(
+            (m: {
+              id: string;
+              name: string;
+              groups: { id: string; name: string; invite_code: string };
+            }) => ({
+              memberId: m.id,
+              memberName: m.name,
+              groupId: m.groups.id,
+              groupName: m.groups.name,
+              inviteCode: m.groups.invite_code,
+            })
+          )
+        );
+      }
+
+      setEditingName(false);
+      setNewName("");
+    } catch {
+      setRenameError("Verbindungsfehler");
+    } finally {
+      setRenaming(false);
+    }
+  }
+
   if (!user) return null;
 
   return (
@@ -129,7 +187,7 @@ export default function Einstellungen() {
       </div>
 
       <div className="px-4 -mt-4 pb-8 flex flex-col gap-4">
-        {/* Profile */}
+        {/* Profile picture */}
         <button
           onClick={() => router.push("/profil")}
           className="bg-card rounded-2xl border border-card-border p-4 shadow-sm flex items-center gap-4 active:scale-[0.98]"
@@ -141,6 +199,57 @@ export default function Einstellungen() {
           </div>
           <span className="text-muted">&rsaquo;</span>
         </button>
+
+        {/* Change name */}
+        <div className="bg-card rounded-2xl border border-card-border p-4 shadow-sm">
+          <p className="font-semibold mb-1">Benutzername</p>
+          {!editingName ? (
+            <div className="flex items-center justify-between mt-2">
+              <p className="text-sm text-muted">@{user.username}</p>
+              <button
+                onClick={() => {
+                  setNewName(user.username);
+                  setEditingName(true);
+                }}
+                className="text-xs text-accent font-semibold px-3 py-1.5 rounded-xl bg-accent/10"
+              >
+                Ändern
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleRename} className="flex flex-col gap-3 mt-2">
+              <input
+                type="text"
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+                className="h-10 rounded-2xl bg-background border border-card-border px-4 text-foreground focus:outline-none focus:border-accent"
+                autoFocus
+              />
+              {renameError && (
+                <p className="text-xs text-red-500">{renameError}</p>
+              )}
+              <div className="flex gap-2">
+                <button
+                  type="submit"
+                  disabled={renaming || !newName.trim() || newName.trim().toLowerCase() === user.username}
+                  className="flex-1 h-10 rounded-2xl bg-accent text-white text-sm font-semibold disabled:opacity-50"
+                >
+                  {renaming ? "Speichern..." : "Speichern"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditingName(false);
+                    setRenameError("");
+                  }}
+                  className="h-10 px-4 rounded-2xl text-sm text-muted bg-background border border-card-border"
+                >
+                  Abbrechen
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
 
         {/* Push notifications */}
         <div className="bg-card rounded-2xl border border-card-border p-4 shadow-sm">
