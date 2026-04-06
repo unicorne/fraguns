@@ -16,12 +16,25 @@ export default function PollAnswer({
   submitting,
 }: PollAnswerProps) {
   const optionsType = config.options_type as string;
-  const customOptions = config.options as string[] | undefined;
+  const configOptions = config.options as string[] | undefined;
 
-  const options =
-    optionsType === "members"
-      ? members.map((m) => ({ value: m.id, label: m.name }))
-      : (customOptions || []).map((o) => ({ value: o, label: o }));
+  let options: { value: string; label: string }[];
+
+  if (optionsType === "members") {
+    // If specific member IDs are provided, filter to those; otherwise show all
+    if (configOptions && configOptions.length > 0) {
+      options = configOptions
+        .map((id) => {
+          const m = members.find((m) => m.id === id);
+          return m ? { value: m.id, label: m.name } : null;
+        })
+        .filter((o): o is { value: string; label: string } => o !== null);
+    } else {
+      options = members.map((m) => ({ value: m.id, label: m.name }));
+    }
+  } else {
+    options = (configOptions || []).map((o) => ({ value: o, label: o }));
+  }
 
   return (
     <div className="flex flex-col gap-2">

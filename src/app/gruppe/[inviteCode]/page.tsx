@@ -3,7 +3,6 @@
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { getMemberForGroup, storeMember, getStoredUser } from "@/lib/storage";
-import Navigation from "@/components/Navigation";
 import QuestionCard from "@/components/QuestionCard";
 import { AvatarGroup } from "@/components/Avatar";
 import Countdown from "@/components/Countdown";
@@ -165,7 +164,6 @@ export default function GruppePage({
             {(() => {
               const storedUser = getStoredUser();
               if (storedUser) {
-                // User is logged in — auto-join with their username
                 return (
                   <>
                     <p className="text-sm text-muted mb-4 text-center">
@@ -183,7 +181,6 @@ export default function GruppePage({
                   </>
                 );
               }
-              // No user — show name input (fallback, shouldn't happen normally)
               return (
                 <>
                   <p className="text-sm text-muted mb-4 text-center">
@@ -218,28 +215,30 @@ export default function GruppePage({
   // Main group dashboard
   return (
     <div className="flex flex-col flex-1 min-h-screen">
-      {/* Colored header with question or empty state */}
+      {/* Header */}
       <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-8 pb-16 text-center">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-2">
           <button
             onClick={() => router.push("/")}
             className="text-white/70 text-sm hover:text-white"
           >
             &larr;
           </button>
-          <div className="flex justify-center">
-            <AvatarGroup
-              names={group.members.map((m) => m.name)}
-              max={5}
-              size="sm"
-            />
-          </div>
+          <h1 className="text-lg font-bold text-white">{group.name}</h1>
           <button
             onClick={() => setShowInvite(!showInvite)}
             className="text-white bg-white/20 text-sm font-semibold px-3 py-1.5 rounded-xl hover:bg-white/30"
           >
             Einladen
           </button>
+        </div>
+
+        <div className="flex justify-center mb-3">
+          <AvatarGroup
+            names={group.members.map((m) => m.name)}
+            max={5}
+            size="sm"
+          />
         </div>
 
         {activeQuestion ? (
@@ -284,7 +283,7 @@ export default function GruppePage({
       )}
 
       {/* Content area */}
-      <main className="flex-1 px-4 -mt-8 pb-24 relative z-10">
+      <main className="flex-1 px-4 -mt-8 pb-20 relative z-10">
         {activeQuestion ? (
           <QuestionCard
             question={activeQuestion}
@@ -296,17 +295,25 @@ export default function GruppePage({
         ) : (
           <div className="bg-card rounded-2xl border border-card-border p-6 text-center shadow-sm">
             <p className="text-muted">Keine aktive Frage</p>
-            <button
-              onClick={() => router.push(`/gruppe/${inviteCode}/fragen/neu`)}
-              className="mt-3 text-sm text-accent font-medium hover:text-accent-dark"
-            >
-              Frage vorschlagen
-            </button>
           </div>
         )}
-      </main>
 
-      <Navigation inviteCode={inviteCode} active="heute" />
+        {/* Action buttons */}
+        <div className="flex gap-3 mt-4">
+          <button
+            onClick={() => router.push(`/gruppe/${inviteCode}/fragen/neu`)}
+            className="flex-1 h-11 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark active:scale-[0.98]"
+          >
+            + Neue Frage
+          </button>
+          <button
+            onClick={() => router.push(`/gruppe/${inviteCode}/verlauf`)}
+            className="h-11 px-5 rounded-2xl bg-card border border-card-border text-foreground font-semibold hover:border-accent active:scale-[0.98]"
+          >
+            Verlauf
+          </button>
+        </div>
+      </main>
     </div>
   );
 }

@@ -3,8 +3,14 @@
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { getMemberForGroup } from "@/lib/storage";
+import Avatar from "@/components/Avatar";
 
 type QuestionType = "poll" | "text" | "scale";
+
+interface Member {
+  id: string;
+  name: string;
+}
 
 export default function NeueFrage({
   params,
@@ -17,11 +23,14 @@ export default function NeueFrage({
   const [text, setText] = useState("");
   const [pollOptions, setPollOptions] = useState<string[]>(["", ""]);
   const [pollUsesMembers, setPollUsesMembers] = useState(true);
+  const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
   const [scaleMin, setScaleMin] = useState(1);
   const [scaleMax, setScaleMax] = useState(10);
   const [submitting, setSubmitting] = useState(false);
   const [groupId, setGroupId] = useState<string | null>(null);
   const [memberId, setMemberId] = useState<string | null>(null);
+  const [groupName, setGroupName] = useState("");
 
   useEffect(() => {
     async function load() {
@@ -29,6 +38,10 @@ export default function NeueFrage({
       if (!res.ok) return;
       const group = await res.json();
       setGroupId(group.id);
+      setGroupName(group.name);
+      setMembers(group.members || []);
+      // All members selected by default
+      setSelectedMembers((group.members || []).map((m: Member) => m.id));
 
       const stored = getMemberForGroup(group.id);
       if (!stored) {
@@ -40,6 +53,12 @@ export default function NeueFrage({
     load();
   }, [inviteCode]);
 
+  function toggleMember(id: string) {
+    setSelectedMembers((prev) =>
+      prev.includes(id) ? prev.filter((m) => m !== id) : [...prev, id]
+    );
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!text.trim() || !groupId) return;
@@ -49,7 +68,10 @@ export default function NeueFrage({
     let config: Record<string, unknown> = {};
     if (type === "poll") {
       if (pollUsesMembers) {
-        config = { options_type: "members" };
+        config = {
+          options_type: "members",
+          options: selectedMembers,
+        };
       } else {
         config = { options: pollOptions.filter((o) => o.trim()) };
       }
@@ -71,7 +93,7 @@ export default function NeueFrage({
       });
 
       if (res.ok) {
-        router.push(`/gruppe/${inviteCode}/fragen`);
+        router.push(`/gruppe/${inviteCode}`);
       }
     } finally {
       setSubmitting(false);
@@ -88,10 +110,10 @@ export default function NeueFrage({
     <div className="flex flex-col flex-1 min-h-screen">
       <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-8 pb-12">
         <button
-          onClick={() => router.push(`/gruppe/${inviteCode}/fragen`)}
+          onClick={() => router.push(`/gruppe/${inviteCode}`)}
           className="text-white/70 text-sm mb-4 hover:text-white"
         >
-          &larr; Zurück
+          &larr; {groupName || "Zurück"}
         </button>
         <h1 className="text-2xl font-bold text-white">Neue Frage</h1>
       </div>
@@ -171,6 +193,45 @@ export default function NeueFrage({
                 </button>
               </div>
 
+              {pollUsesMembers && (
+                <div className="flex flex-col gap-2">
+                  {members.map((m) => {
+                    const selected = selectedMembers.includes(m.id);
+                    return (
+                      <button
+                        key={m.id}
+                        type="button"
+                        onClick={() => toggleMember(m.id)}
+                        className={`flex items-center gap-3 py-2.5 px-3 rounded-2xl border ${
+                          selected
+                            ? "border-accent bg-accent/10"
+                            : "border-card-border bg-background opacity-50"
+                        }`}
+                      >
+                        <Avatar name={m.name} size="sm" />
+                        <span className="text-sm font-medium flex-1 text-left">
+                          {m.name}
+                        </span>
+                        <div
+                          className={`w-5 h-5 rounded-md border-2 flex items-center justify-center ${
+                            selected
+                              ? "bg-accent border-accent"
+                              : "border-card-border"
+                          }`}
+                        >
+                          {selected && (
+                            <span className="text-white text-xs">✓</span>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                  <p className="text-xs text-muted text-center mt-1">
+                    {selectedMembers.length} von {members.length} ausgewählt
+                  </p>
+                </div>
+              )}
+
               {!pollUsesMembers && (
                 <div className="flex flex-col gap-2">
                   {pollOptions.map((opt, i) => (
@@ -225,7 +286,11 @@ export default function NeueFrage({
 
           <button
             type="submit"
-            disabled={submitting || !text.trim()}
+            disabled={
+              submitting ||
+              !text.trim() ||
+              (type === "poll" && pollUsesMembers && selectedMembers.length < 2)
+            }
             className="h-12 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
           >
             {submitting ? "Erstelle..." : "Frage hinzufügen"}
