@@ -3,7 +3,6 @@
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { getMemberForGroup } from "@/lib/storage";
-import Navigation from "@/components/Navigation";
 
 interface Question {
   id: string;
@@ -64,10 +63,16 @@ export default function Verlauf({
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-8 pb-12">
+        <button
+          onClick={() => router.push(`/gruppe/${inviteCode}`)}
+          className="text-white/70 text-sm mb-4 hover:text-white"
+        >
+          &larr; Zurück
+        </button>
         <h1 className="text-xl font-bold text-white">Verlauf</h1>
       </div>
 
-      <main className="flex-1 px-4 -mt-4 pb-24">
+      <main className="flex-1 px-4 -mt-4 pb-8">
         {past.length === 0 ? (
           <div className="bg-card rounded-2xl border border-card-border p-6 text-center shadow-sm">
             <p className="text-muted">Noch keine vergangenen Fragen</p>
@@ -104,7 +109,6 @@ export default function Verlauf({
         )}
       </main>
 
-      <Navigation inviteCode={inviteCode} active="verlauf" />
     </div>
   );
 }
