@@ -4,14 +4,6 @@ const COLORS = [
   "#ec4899", "#f43f5e", "#14b8a6", "#6366f1",
 ];
 
-export const AVATAR_COLORS = COLORS;
-
-export const AVATAR_EMOJIS = [
-  "😎", "🦁", "🌟", "👻", "🔥", "🐱", "🦊", "🐻",
-  "🐸", "🦄", "🐙", "🎃", "💀", "🤖", "👽", "🎯",
-  "⚡", "🌈", "🍕", "🎸", "🏀", "🎮", "🚀", "💎",
-];
-
 function getColor(name: string): string {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
@@ -31,8 +23,6 @@ function getInitials(name: string): string {
 
 export interface AvatarData {
   avatar_type?: string;
-  avatar_emoji?: string | null;
-  avatar_color?: string | null;
   avatar_url?: string | null;
 }
 
@@ -50,7 +40,6 @@ const sizes = {
 };
 
 export default function Avatar({ name, size = "md", avatarData }: AvatarProps) {
-  // Image avatar
   if (avatarData?.avatar_type === "image" && avatarData.avatar_url) {
     return (
       <img
@@ -61,19 +50,6 @@ export default function Avatar({ name, size = "md", avatarData }: AvatarProps) {
     );
   }
 
-  // Emoji avatar
-  if (avatarData?.avatar_type === "emoji" && avatarData.avatar_emoji) {
-    return (
-      <div
-        className={`${sizes[size]} rounded-full flex items-center justify-center shrink-0`}
-        style={{ backgroundColor: avatarData.avatar_color || getColor(name) }}
-      >
-        {avatarData.avatar_emoji}
-      </div>
-    );
-  }
-
-  // Default: initials
   return (
     <div
       className={`${sizes[size]} rounded-full flex items-center justify-center font-bold text-white shrink-0`}
