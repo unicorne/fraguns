@@ -1,13 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --accent: #7c3aed;
-  --accent-light: #a78bfa;
-  --card: #18181b;
-  --card-border: #27272a;
-  --muted: #71717a;
+  --background: #f5f0e8;
+  --foreground: #1a1a1a;
+  --accent: #2d8b7a;
+  --accent-light: #3ba594;
+  --accent-dark: #236b5e;
+  --card: #ffffff;
+  --card-border: #e8e0d4;
+  --muted: #8a8078;
+  --orange: #f59e0b;
+  --orange-light: #fbbf24;
+  --header-gradient-start: #2d8b7a;
+  --header-gradient-end: #3ba594;
 }
 
 @theme inline {
@@ -15,9 +20,12 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
+  --color-accent-dark: var(--accent-dark);
   --color-card: var(--card);
   --color-card-border: var(--card-border);
   --color-muted: var(--muted);
+  --color-orange: var(--orange);
+  --color-orange-light: var(--orange-light);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -28,7 +36,6 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/* Smooth transitions for interactive elements */
-button, a, input {
+button, a, input, textarea {
   transition: all 0.15s ease;
 }

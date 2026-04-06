@@ -21,7 +21,7 @@ export default function ScaleAnswer({
   return (
     <div className="flex flex-col gap-4">
       <div className="text-center">
-        <span className="text-3xl font-bold text-accent">{value}</span>
+        <span className="text-4xl font-bold text-accent">{value}</span>
       </div>
 
       <input
@@ -41,7 +41,7 @@ export default function ScaleAnswer({
       <button
         onClick={() => onAnswer({ scale: value })}
         disabled={submitting}
-        className="h-10 rounded-xl bg-accent text-white font-medium hover:bg-accent-light disabled:opacity-50"
+        className="h-11 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
       >
         {submitting ? "Sende..." : "Absenden"}
       </button>

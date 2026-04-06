@@ -15,13 +15,13 @@ const tabs = [
 
 export default function Navigation({ inviteCode, active }: NavigationProps) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-card-border">
+    <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-card-border shadow-lg">
       <div className="flex justify-around max-w-lg mx-auto">
         {tabs.map((tab) => (
           <Link
             key={tab.key}
             href={`/gruppe/${inviteCode}${tab.path}`}
-            className={`flex-1 py-3 text-center text-xs font-medium ${
+            className={`flex-1 py-3.5 text-center text-xs font-semibold ${
               active === tab.key ? "text-accent" : "text-muted"
             }`}
           >

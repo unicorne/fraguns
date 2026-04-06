@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { getMemberForGroup, storeMember } from "@/lib/storage";
 import Navigation from "@/components/Navigation";
 import QuestionCard from "@/components/QuestionCard";
+import { AvatarGroup } from "@/components/Avatar";
+import Countdown from "@/components/Countdown";
 
 interface Member {
   id: string;
@@ -60,10 +62,8 @@ export default function GruppePage({
       const data = await res.json();
       setGroup(data);
 
-      // Check if user is already a member
       const stored = getMemberForGroup(data.id);
       if (stored) {
-        // Backfill inviteCode if missing (for old sessions)
         if (!stored.inviteCode) {
           storeMember({ ...stored, inviteCode });
         }
@@ -112,7 +112,6 @@ export default function GruppePage({
       });
 
       setCurrentMember({ memberId: member.id, memberName: member.name });
-      // Refresh group to get updated member list
       fetchGroup();
     } catch {
       // Error joining
@@ -123,7 +122,7 @@ export default function GruppePage({
 
   if (loading) {
     return (
-      <div className="flex flex-1 items-center justify-center">
+      <div className="flex flex-1 items-center justify-center min-h-screen">
         <div className="text-muted">Laden...</div>
       </div>
     );
@@ -131,54 +130,49 @@ export default function GruppePage({
 
   if (!group) return null;
 
-  // Join screen if not a member
+  // Join screen
   if (!currentMember) {
     return (
-      <div className="flex flex-col flex-1 items-center justify-center px-6">
-        <div className="w-full max-w-sm flex flex-col items-center gap-6">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold">{group.name}</h1>
-            <p className="text-muted text-sm mt-1">
-              {group.members.length} Mitglieder
-            </p>
-          </div>
-
-          <div className="w-full bg-card rounded-xl border border-card-border p-4">
-            <p className="text-sm text-muted mb-3">Mitglieder:</p>
-            <div className="flex flex-wrap gap-2">
-              {group.members.map((m) => (
-                <span
-                  key={m.id}
-                  className="px-3 py-1 rounded-full bg-background text-sm"
-                >
-                  {m.name}
-                </span>
-              ))}
-              {group.members.length === 0 && (
-                <span className="text-muted text-sm">
-                  Noch keine Mitglieder
-                </span>
-              )}
+      <div className="flex flex-col flex-1 min-h-screen">
+        <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-10 pb-12 text-center">
+          <h1 className="text-2xl font-bold text-white">{group.name}</h1>
+          <p className="text-white/70 text-sm mt-1">
+            {group.members.length} Mitglieder
+          </p>
+          {group.members.length > 0 && (
+            <div className="flex justify-center mt-4">
+              <AvatarGroup
+                names={group.members.map((m) => m.name)}
+                max={6}
+                size="md"
+              />
             </div>
-          </div>
+          )}
+        </div>
 
-          <form onSubmit={handleJoin} className="w-full flex flex-col gap-3">
-            <input
-              type="text"
-              placeholder="Dein Name"
-              value={memberName}
-              onChange={(e) => setMemberName(e.target.value)}
-              className="h-12 rounded-xl bg-card border border-card-border px-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent"
-              autoFocus
-            />
-            <button
-              type="submit"
-              disabled={joining || !memberName.trim()}
-              className="h-12 rounded-xl bg-accent text-white font-medium hover:bg-accent-light disabled:opacity-50"
-            >
-              {joining ? "Beitreten..." : "Gruppe beitreten"}
-            </button>
-          </form>
+        <div className="px-6 -mt-4">
+          <div className="bg-card rounded-2xl border border-card-border p-5 shadow-sm">
+            <p className="text-sm text-muted mb-4 text-center">
+              Tritt der Gruppe bei
+            </p>
+            <form onSubmit={handleJoin} className="flex flex-col gap-3">
+              <input
+                type="text"
+                placeholder="Dein Name"
+                value={memberName}
+                onChange={(e) => setMemberName(e.target.value)}
+                className="h-12 rounded-2xl bg-background border border-card-border px-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent"
+                autoFocus
+              />
+              <button
+                type="submit"
+                disabled={joining || !memberName.trim()}
+                className="h-12 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
+              >
+                {joining ? "Beitreten..." : "Gruppe beitreten"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     );
@@ -186,52 +180,78 @@ export default function GruppePage({
 
   // Main group dashboard
   return (
-    <div className="flex flex-col flex-1">
-      <header className="px-6 pt-6 pb-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold">{group.name}</h1>
-            <p className="text-muted text-xs">
-              Hallo, {currentMember.memberName}
-            </p>
+    <div className="flex flex-col flex-1 min-h-screen">
+      {/* Colored header with question or empty state */}
+      <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-8 pb-16 text-center">
+        <div className="flex items-center justify-between mb-4">
+          <button
+            onClick={() => router.push("/")}
+            className="text-white/70 text-sm hover:text-white"
+          >
+            &larr;
+          </button>
+          <div className="flex justify-center">
+            <AvatarGroup
+              names={group.members.map((m) => m.name)}
+              max={5}
+              size="sm"
+            />
           </div>
           <button
             onClick={() => setShowInvite(!showInvite)}
-            className="text-xs px-3 py-1.5 rounded-lg bg-card border border-card-border text-muted hover:text-foreground"
+            className="text-white/70 text-sm hover:text-white"
           >
-            Einladen
+            +
           </button>
         </div>
 
-        {showInvite && (
-          <div className="mt-3 p-3 rounded-xl bg-card border border-card-border">
-            <p className="text-xs text-muted mb-2">Einladungslink:</p>
-            <div className="flex gap-2">
-              <input
-                readOnly
-                value={`${typeof window !== "undefined" ? window.location.origin : ""}/gruppe/${group.invite_code}`}
-                className="flex-1 text-xs bg-background rounded-lg px-3 py-2 text-foreground"
-              />
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(
-                    `${window.location.origin}/gruppe/${group.invite_code}`
-                  );
-                }}
-                className="text-xs px-3 py-2 rounded-lg bg-accent text-white"
-              >
-                Kopieren
-              </button>
+        {activeQuestion ? (
+          <>
+            <h2 className="text-xl font-bold text-white leading-snug px-2">
+              {activeQuestion.text}
+            </h2>
+            <div className="mt-3">
+              <Countdown />
             </div>
-          </div>
+          </>
+        ) : (
+          <>
+            <h2 className="text-lg text-white/80 mt-4">
+              Heute keine Frage aktiv
+            </h2>
+            <div className="mt-3">
+              <Countdown />
+            </div>
+          </>
         )}
-      </header>
+      </div>
 
-      <main className="flex-1 px-6 pb-24">
-        <h2 className="text-sm font-medium text-muted mb-3">
-          Heutige Frage
-        </h2>
+      {/* Invite bar */}
+      {showInvite && (
+        <div className="mx-4 -mt-4 mb-2 p-3 rounded-2xl bg-card border border-card-border shadow-sm z-10 relative">
+          <p className="text-xs text-muted mb-2">Einladungslink:</p>
+          <div className="flex gap-2">
+            <input
+              readOnly
+              value={`${typeof window !== "undefined" ? window.location.origin : ""}/gruppe/${group.invite_code}`}
+              className="flex-1 text-xs bg-background rounded-xl px-3 py-2 text-foreground border border-card-border"
+            />
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `${window.location.origin}/gruppe/${group.invite_code}`
+                );
+              }}
+              className="text-xs px-3 py-2 rounded-xl bg-accent text-white font-medium"
+            >
+              Kopieren
+            </button>
+          </div>
+        </div>
+      )}
 
+      {/* Content area */}
+      <main className="flex-1 px-4 -mt-8 pb-24 relative z-10">
         {activeQuestion ? (
           <QuestionCard
             question={activeQuestion}
@@ -241,11 +261,11 @@ export default function GruppePage({
             inviteCode={inviteCode}
           />
         ) : (
-          <div className="bg-card rounded-xl border border-card-border p-6 text-center">
-            <p className="text-muted">Heute keine Frage aktiv</p>
+          <div className="bg-card rounded-2xl border border-card-border p-6 text-center shadow-sm">
+            <p className="text-muted">Keine aktive Frage</p>
             <button
               onClick={() => router.push(`/gruppe/${inviteCode}/fragen/neu`)}
-              className="mt-3 text-sm text-accent hover:text-accent-light"
+              className="mt-3 text-sm text-accent font-medium hover:text-accent-dark"
             >
               Frage vorschlagen
             </button>

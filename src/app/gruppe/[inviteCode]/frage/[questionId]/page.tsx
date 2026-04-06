@@ -69,7 +69,7 @@ export default function FrageErgebnisse({
 
   if (loading) {
     return (
-      <div className="flex flex-1 items-center justify-center">
+      <div className="flex flex-1 items-center justify-center min-h-screen">
         <div className="text-muted">Laden...</div>
       </div>
     );
@@ -78,17 +78,18 @@ export default function FrageErgebnisse({
   if (!results) return null;
 
   return (
-    <div className="flex flex-col flex-1 px-6 pt-6 pb-24">
-      <button
-        onClick={() => router.push(`/gruppe/${inviteCode}`)}
-        className="text-muted text-sm mb-6 hover:text-foreground self-start"
-      >
-        &larr; Zurück
-      </button>
-
-      <div className="bg-card rounded-xl border border-card-border p-6 mb-4">
-        <p className="text-lg font-medium">{results.question.text}</p>
-        <p className="text-xs text-muted mt-1 capitalize">
+    <div className="flex flex-col flex-1 min-h-screen">
+      <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-8 pb-12 text-center">
+        <button
+          onClick={() => router.push(`/gruppe/${inviteCode}`)}
+          className="text-white/70 text-sm mb-4 hover:text-white self-start block"
+        >
+          &larr; Zurück
+        </button>
+        <h2 className="text-xl font-bold text-white leading-snug">
+          {results.question.text}
+        </h2>
+        <p className="text-white/60 text-xs mt-2">
           {results.question.type === "poll"
             ? "Abstimmung"
             : results.question.type === "text"
@@ -97,43 +98,44 @@ export default function FrageErgebnisse({
         </p>
       </div>
 
-      {!results.revealed ? (
-        <div className="bg-card rounded-xl border border-card-border p-6 text-center">
-          <p className="text-muted mb-3">
-            Du musst zuerst antworten, um die Ergebnisse zu sehen.
-          </p>
-          <button
-            onClick={() => router.push(`/gruppe/${inviteCode}`)}
-            className="text-sm text-accent hover:text-accent-light"
-          >
-            Zur Frage
-          </button>
-        </div>
-      ) : (
-        <div className="bg-card rounded-xl border border-card-border p-6">
-          <h2 className="text-sm font-medium text-muted mb-4">Ergebnisse</h2>
+      <main className="px-4 -mt-4 pb-8">
+        {!results.revealed ? (
+          <div className="bg-card rounded-2xl border border-card-border p-6 text-center shadow-sm">
+            <p className="text-muted mb-3">
+              Du musst zuerst antworten, um die Ergebnisse zu sehen.
+            </p>
+            <button
+              onClick={() => router.push(`/gruppe/${inviteCode}`)}
+              className="text-sm text-accent font-semibold hover:text-accent-dark"
+            >
+              Zur Frage
+            </button>
+          </div>
+        ) : (
+          <div className="bg-card rounded-2xl border border-card-border p-5 shadow-sm">
+            <p className="text-xs text-muted mb-4 text-center">
+              {results.answers?.length || 0} von {results.total} haben
+              geantwortet
+            </p>
 
-          {results.question.type === "poll" && (
-            <PollResults
-              answers={results.answers || []}
-              config={results.question.config}
-            />
-          )}
-          {results.question.type === "text" && (
-            <TextResults answers={results.answers || []} />
-          )}
-          {results.question.type === "scale" && (
-            <ScaleResults
-              answers={results.answers || []}
-              config={results.question.config}
-            />
-          )}
-
-          <p className="text-xs text-muted mt-4 text-center">
-            {results.answers?.length || 0} von {results.total} haben geantwortet
-          </p>
-        </div>
-      )}
+            {results.question.type === "poll" && (
+              <PollResults
+                answers={results.answers || []}
+                config={results.question.config}
+              />
+            )}
+            {results.question.type === "text" && (
+              <TextResults answers={results.answers || []} />
+            )}
+            {results.question.type === "scale" && (
+              <ScaleResults
+                answers={results.answers || []}
+                config={results.question.config}
+              />
+            )}
+          </div>
+        )}
+      </main>
     </div>
   );
 }

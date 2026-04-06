@@ -17,12 +17,12 @@ export default function TextAnswer({ onAnswer, submitting }: TextAnswerProps) {
         onChange={(e) => setText(e.target.value)}
         placeholder="Deine Antwort..."
         rows={3}
-        className="w-full rounded-xl bg-background border border-card-border px-4 py-3 text-foreground placeholder:text-muted focus:outline-none focus:border-accent resize-none"
+        className="w-full rounded-2xl bg-background border border-card-border px-4 py-3 text-foreground placeholder:text-muted focus:outline-none focus:border-accent resize-none"
       />
       <button
         onClick={() => onAnswer({ text })}
         disabled={submitting || !text.trim()}
-        className="h-10 rounded-xl bg-accent text-white font-medium hover:bg-accent-light disabled:opacity-50"
+        className="h-11 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
       >
         {submitting ? "Sende..." : "Absenden"}
       </button>

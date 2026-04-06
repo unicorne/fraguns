@@ -1,3 +1,5 @@
+import Avatar from "@/components/Avatar";
+
 interface PollResultsProps {
   answers: Array<{
     value: Record<string, unknown>;
@@ -7,7 +9,6 @@ interface PollResultsProps {
 }
 
 export default function PollResults({ answers, config }: PollResultsProps) {
-  // Count votes per option
   const voteCounts: Record<string, { count: number; voters: string[] }> = {};
   const customOptions = config.options as string[] | undefined;
 
@@ -25,34 +26,44 @@ export default function PollResults({ answers, config }: PollResultsProps) {
     ([, a], [, b]) => b.count - a.count
   );
 
-  // Try to resolve option labels
   const getLabel = (key: string) => {
     if (customOptions?.includes(key)) return key;
-    // For member votes, the key is a UUID — we'll show who voted for whom
     return key;
   };
 
   return (
     <div className="flex flex-col gap-3">
-      {sorted.map(([option, data]) => {
+      {sorted.map(([option, data], i) => {
         const pct = total > 0 ? Math.round((data.count / total) * 100) : 0;
+        const isTop = i === 0;
         return (
-          <div key={option}>
-            <div className="flex justify-between text-sm mb-1">
-              <span>{getLabel(option)}</span>
-              <span className="text-muted">
-                {data.count} ({pct}%)
-              </span>
-            </div>
-            <div className="h-8 rounded-lg bg-background overflow-hidden">
+          <div key={option} className="relative">
+            <div
+              className={`rounded-2xl overflow-hidden ${
+                isTop ? "bg-orange/20" : "bg-background"
+              }`}
+            >
               <div
-                className="h-full bg-accent/30 rounded-lg flex items-center px-3"
-                style={{ width: `${Math.max(pct, 5)}%` }}
+                className={`py-3 px-4 rounded-2xl flex items-center gap-3 ${
+                  isTop ? "bg-orange" : "bg-card-border"
+                }`}
+                style={{ width: `${Math.max(pct, 15)}%` }}
               >
-                <span className="text-xs text-muted truncate">
-                  {data.voters.join(", ")}
+                <span
+                  className={`text-sm font-bold ${isTop ? "text-white" : "text-foreground"}`}
+                >
+                  {pct}%
                 </span>
               </div>
+            </div>
+            <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
+              <span className="text-sm font-bold ml-14">{getLabel(option)}</span>
+            </div>
+            {/* Voter avatars on the right */}
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex -space-x-1">
+              {data.voters.slice(0, 3).map((name) => (
+                <Avatar key={name} name={name} size="sm" />
+              ))}
             </div>
           </div>
         );

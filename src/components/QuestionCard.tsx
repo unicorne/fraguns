@@ -60,8 +60,7 @@ export default function QuestionCard({
         `/api/questions/${question.id}/results?member_id=${memberId}`
       );
       if (res.ok) {
-        const data = await res.json();
-        setResults(data);
+        setResults(await res.json());
       }
     } finally {
       setLoading(false);
@@ -81,7 +80,6 @@ export default function QuestionCard({
         }),
       });
       if (res.ok) {
-        // Re-fetch results — now revealed since we answered
         await checkResults();
       }
     } finally {
@@ -91,7 +89,7 @@ export default function QuestionCard({
 
   if (loading) {
     return (
-      <div className="bg-card rounded-xl border border-card-border p-6 text-center">
+      <div className="bg-card rounded-2xl border border-card-border p-6 text-center shadow-sm">
         <p className="text-muted">Laden...</p>
       </div>
     );
@@ -100,8 +98,10 @@ export default function QuestionCard({
   // Already answered — show results
   if (results?.revealed) {
     return (
-      <div className="bg-card rounded-xl border border-card-border p-6">
-        <p className="text-lg font-medium mb-4">{question.text}</p>
+      <div className="bg-card rounded-2xl border border-card-border p-5 shadow-sm">
+        <p className="text-xs text-muted mb-4 text-center">
+          {results.answers?.length || 0} von {results.total} haben geantwortet
+        </p>
 
         {question.type === "poll" && (
           <PollResults
@@ -118,19 +118,13 @@ export default function QuestionCard({
             config={question.config}
           />
         )}
-
-        <p className="text-xs text-muted mt-4 text-center">
-          {results.answers?.length || 0} von {results.total} haben geantwortet
-        </p>
       </div>
     );
   }
 
   // Not yet answered — show answer form
   return (
-    <div className="bg-card rounded-xl border border-card-border p-6">
-      <p className="text-lg font-medium mb-4">{question.text}</p>
-
+    <div className="bg-card rounded-2xl border border-card-border p-5 shadow-sm">
       {question.type === "poll" && (
         <PollAnswer
           config={question.config}

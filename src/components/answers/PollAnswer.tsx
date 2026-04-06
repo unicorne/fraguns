@@ -1,5 +1,7 @@
 "use client";
 
+import Avatar from "@/components/Avatar";
+
 interface PollAnswerProps {
   config: Record<string, unknown>;
   members: { id: string; name: string }[];
@@ -13,7 +15,6 @@ export default function PollAnswer({
   onAnswer,
   submitting,
 }: PollAnswerProps) {
-  // If options_type is "members", use group members as options
   const optionsType = config.options_type as string;
   const customOptions = config.options as string[] | undefined;
 
@@ -29,9 +30,10 @@ export default function PollAnswer({
           key={option.value}
           onClick={() => onAnswer({ vote: option.value })}
           disabled={submitting}
-          className="w-full py-3 px-4 rounded-xl bg-background border border-card-border text-left hover:border-accent disabled:opacity-50"
+          className="w-full py-3 px-4 rounded-2xl bg-background border border-card-border text-left hover:border-accent active:scale-[0.98] disabled:opacity-50 flex items-center gap-3"
         >
-          {option.label}
+          <Avatar name={option.label} size="sm" />
+          <span className="font-medium">{option.label}</span>
         </button>
       ))}
     </div>
