@@ -4,9 +4,19 @@ import { useEffect, useState } from "react";
 import PollAnswer from "./answers/PollAnswer";
 import TextAnswer from "./answers/TextAnswer";
 import ScaleAnswer from "./answers/ScaleAnswer";
+import EstimateAnswer from "./answers/EstimateAnswer";
+import TimelineAnswer from "./answers/TimelineAnswer";
+import TwoTruthsOneLieAnswer from "./answers/TwoTruthsOneLieAnswer";
 import PollResults from "./results/PollResults";
 import TextResults from "./results/TextResults";
 import ScaleResults from "./results/ScaleResults";
+import EstimateResults from "./results/EstimateResults";
+import TimelineResults from "./results/TimelineResults";
+import TwoTruthsOneLieResults from "./results/TwoTruthsOneLieResults";
+import TeamSplitAnswer from "./answers/TeamSplitAnswer";
+import TeamSplitResults from "./results/TeamSplitResults";
+import RankingAnswer from "./answers/RankingAnswer";
+import RankingResults from "./results/RankingResults";
 import QuestionRating from "./QuestionRating";
 
 interface Answer {
@@ -120,6 +130,34 @@ export default function QuestionCard({
             config={question.config}
           />
         )}
+        {question.type === "estimate" && (
+          <EstimateResults
+            answers={results.answers || []}
+            config={question.config}
+          />
+        )}
+        {question.type === "timeline" && (
+          <TimelineResults answers={results.answers || []} />
+        )}
+        {question.type === "two_truths_one_lie" && (
+          <TwoTruthsOneLieResults
+            answers={results.answers || []}
+            questionId={question.id}
+            memberId={memberId}
+          />
+        )}
+        {question.type === "team_split" && (
+          <TeamSplitResults
+            answers={results.answers || []}
+            config={question.config}
+          />
+        )}
+        {question.type === "ranking" && (
+          <RankingResults
+            answers={results.answers || []}
+            groupMembers={members}
+          />
+        )}
 
         <QuestionRating questionId={question.id} memberId={memberId} />
       </div>
@@ -143,6 +181,39 @@ export default function QuestionCard({
       {question.type === "scale" && (
         <ScaleAnswer
           config={question.config}
+          onAnswer={handleAnswer}
+          submitting={submitting}
+        />
+      )}
+      {question.type === "estimate" && (
+        <EstimateAnswer
+          config={question.config}
+          onAnswer={handleAnswer}
+          submitting={submitting}
+        />
+      )}
+      {question.type === "timeline" && (
+        <TimelineAnswer
+          onAnswer={handleAnswer}
+          submitting={submitting}
+        />
+      )}
+      {question.type === "two_truths_one_lie" && (
+        <TwoTruthsOneLieAnswer
+          onAnswer={handleAnswer}
+          submitting={submitting}
+        />
+      )}
+      {question.type === "team_split" && (
+        <TeamSplitAnswer
+          config={question.config}
+          onAnswer={handleAnswer}
+          submitting={submitting}
+        />
+      )}
+      {question.type === "ranking" && (
+        <RankingAnswer
+          members={members}
           onAnswer={handleAnswer}
           submitting={submitting}
         />

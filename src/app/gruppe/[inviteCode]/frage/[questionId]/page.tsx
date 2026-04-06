@@ -6,6 +6,11 @@ import { getMemberForGroup } from "@/lib/storage";
 import PollResults from "@/components/results/PollResults";
 import TextResults from "@/components/results/TextResults";
 import ScaleResults from "@/components/results/ScaleResults";
+import EstimateResults from "@/components/results/EstimateResults";
+import TimelineResults from "@/components/results/TimelineResults";
+import TwoTruthsOneLieResults from "@/components/results/TwoTruthsOneLieResults";
+import TeamSplitResults from "@/components/results/TeamSplitResults";
+import RankingResults from "@/components/results/RankingResults";
 
 interface ResultsData {
   revealed: boolean;
@@ -96,7 +101,17 @@ export default function FrageErgebnisse({
             ? "Abstimmung"
             : results.question.type === "text"
               ? "Freitext"
-              : "Skala"}
+              : results.question.type === "scale"
+                ? "Skala"
+                : results.question.type === "estimate"
+                  ? "Schätzfrage"
+                  : results.question.type === "timeline"
+                    ? "Timeline"
+                    : results.question.type === "team_split"
+                      ? "Team-Aufteilung"
+                      : results.question.type === "ranking"
+                        ? "Ranking"
+                        : "2 Wahrheiten 1 Lüge"}
         </p>
       </div>
 
@@ -134,6 +149,34 @@ export default function FrageErgebnisse({
               <ScaleResults
                 answers={results.answers || []}
                 config={results.question.config}
+              />
+            )}
+            {results.question.type === "estimate" && (
+              <EstimateResults
+                answers={results.answers || []}
+                config={results.question.config}
+              />
+            )}
+            {results.question.type === "timeline" && (
+              <TimelineResults answers={results.answers || []} />
+            )}
+            {results.question.type === "two_truths_one_lie" && memberId && (
+              <TwoTruthsOneLieResults
+                answers={results.answers || []}
+                questionId={questionId}
+                memberId={memberId}
+              />
+            )}
+            {results.question.type === "team_split" && (
+              <TeamSplitResults
+                answers={results.answers || []}
+                config={results.question.config}
+              />
+            )}
+            {results.question.type === "ranking" && (
+              <RankingResults
+                answers={results.answers || []}
+                groupMembers={groupMembers}
               />
             )}
           </div>

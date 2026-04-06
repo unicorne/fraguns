@@ -1,4 +1,4 @@
-const CACHE_NAME = "fraguns-v2";
+const CACHE_NAME = "fraguns-v3";
 
 // Install: skip waiting (no precache — Next.js pages are dynamic)
 self.addEventListener("install", () => {

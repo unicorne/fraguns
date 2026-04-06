@@ -50,6 +50,34 @@ export async function GET(
     });
   }
 
+  let answersData = question.answers;
+
+  // For two_truths_one_lie: hide lie_index from other members' answers
+  // until the requesting member has voted on them
+  if (question.type === "two_truths_one_lie" && memberId) {
+    const { data: myVotes } = await supabaseAdmin
+      .from("votes")
+      .select("target_member_id")
+      .eq("question_id", id)
+      .eq("voter_id", memberId);
+
+    const votedTargets = new Set(
+      (myVotes || []).map((v: { target_member_id: string }) => v.target_member_id)
+    );
+
+    answersData = question.answers.map(
+      (a: { value: Record<string, unknown>; members: { id: string } }) => {
+        if (a.members.id === memberId || votedTargets.has(a.members.id)) {
+          return a; // Show lie_index for own answer and voted members
+        }
+        // Strip lie_index for members not yet voted on
+        const { lie_index: _, ...safeValue } = a.value;
+        void _;
+        return { ...a, value: safeValue };
+      }
+    );
+  }
+
   return NextResponse.json({
     revealed: true,
     question: {
@@ -58,7 +86,7 @@ export async function GET(
       type: question.type,
       config: question.config,
     },
-    answers: question.answers,
+    answers: answersData,
     total: memberCount,
   });
 }

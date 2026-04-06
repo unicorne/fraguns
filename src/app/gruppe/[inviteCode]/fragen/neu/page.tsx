@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { getMemberForGroup } from "@/lib/storage";
 import Avatar from "@/components/Avatar";
 
-type QuestionType = "poll" | "text" | "scale";
+type QuestionType = "poll" | "text" | "scale" | "estimate" | "timeline" | "two_truths_one_lie" | "team_split" | "ranking";
 
 interface Member {
   id: string;
@@ -27,6 +27,10 @@ export default function NeueFrage({
   const [members, setMembers] = useState<Member[]>([]);
   const [scaleMin, setScaleMin] = useState(1);
   const [scaleMax, setScaleMax] = useState(10);
+  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [unit, setUnit] = useState("");
+  const [teamLabel1, setTeamLabel1] = useState("");
+  const [teamLabel2, setTeamLabel2] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [groupId, setGroupId] = useState<string | null>(null);
   const [memberId, setMemberId] = useState<string | null>(null);
@@ -77,6 +81,10 @@ export default function NeueFrage({
       }
     } else if (type === "scale") {
       config = { min: scaleMin, max: scaleMax };
+    } else if (type === "estimate") {
+      config = { correct_answer: Number(correctAnswer), unit: unit || undefined };
+    } else if (type === "team_split") {
+      config = { team_labels: [teamLabel1.trim(), teamLabel2.trim()] };
     }
 
     try {
@@ -104,6 +112,9 @@ export default function NeueFrage({
     { key: "poll", label: "Abstimmung" },
     { key: "text", label: "Freitext" },
     { key: "scale", label: "Skala" },
+    { key: "estimate", label: "Schätzfrage" },
+    { key: "team_split", label: "Team-Aufteilung" },
+    { key: "ranking", label: "Ranking" },
   ];
 
   return (
@@ -126,13 +137,13 @@ export default function NeueFrage({
           {/* Type selector */}
           <div>
             <label className="text-sm text-muted mb-2 block">Fragetyp</label>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-3 gap-2">
               {types.map((t) => (
                 <button
                   key={t.key}
                   type="button"
                   onClick={() => setType(t.key)}
-                  className={`flex-1 py-2.5 rounded-2xl text-sm font-semibold border ${
+                  className={`py-2.5 rounded-2xl text-xs font-semibold border ${
                     type === t.key
                       ? "bg-accent text-white border-accent"
                       : "bg-background border-card-border text-muted"
@@ -155,7 +166,17 @@ export default function NeueFrage({
                   ? "z.B. Wer wird eher reich?"
                   : type === "text"
                     ? "z.B. Was ist deine peinlichste Geschichte?"
-                    : "z.B. Wie gut kocht Tim?"
+                    : type === "scale"
+                      ? "z.B. Wie gut kocht Tim?"
+                      : type === "estimate"
+                        ? "z.B. Wie viele Länder habe ich besucht?"
+                        : type === "team_split"
+                          ? "z.B. Wer hat Rizz und wer hat Anti-Rizz?"
+                          : type === "ranking"
+                            ? "z.B. Sortiert die Gruppe nach Tanzskills"
+                            : type === "timeline"
+                              ? "z.B. Wann hattest du deinen ersten Kuss?"
+                              : "z.B. Erzähle 2 Wahrheiten und 1 Lüge über dich!"
               }
               rows={2}
               className="w-full rounded-2xl bg-background border border-card-border px-4 py-3 text-foreground placeholder:text-muted focus:outline-none focus:border-accent resize-none"
@@ -284,12 +305,70 @@ export default function NeueFrage({
             </div>
           )}
 
+          {/* Estimate config */}
+          {type === "estimate" && (
+            <div className="flex flex-col gap-3">
+              <div>
+                <label className="text-sm text-muted mb-2 block">
+                  Richtige Antwort
+                </label>
+                <input
+                  type="number"
+                  value={correctAnswer}
+                  onChange={(e) => setCorrectAnswer(e.target.value)}
+                  placeholder="z.B. 12"
+                  className="w-full h-10 rounded-2xl bg-background border border-card-border px-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent"
+                />
+              </div>
+              <div>
+                <label className="text-sm text-muted mb-2 block">
+                  Einheit (optional)
+                </label>
+                <input
+                  type="text"
+                  value={unit}
+                  onChange={(e) => setUnit(e.target.value)}
+                  placeholder="z.B. Länder, km, Stunden"
+                  className="w-full h-10 rounded-2xl bg-background border border-card-border px-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Team Split config */}
+          {type === "team_split" && (
+            <div className="flex gap-3">
+              <div className="flex-1">
+                <label className="text-sm text-muted mb-2 block">Team 1</label>
+                <input
+                  type="text"
+                  value={teamLabel1}
+                  onChange={(e) => setTeamLabel1(e.target.value)}
+                  placeholder="z.B. Rizz-Lord"
+                  className="w-full h-10 rounded-2xl bg-background border border-card-border px-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent"
+                />
+              </div>
+              <div className="flex-1">
+                <label className="text-sm text-muted mb-2 block">Team 2</label>
+                <input
+                  type="text"
+                  value={teamLabel2}
+                  onChange={(e) => setTeamLabel2(e.target.value)}
+                  placeholder="z.B. Anti-Rizz"
+                  className="w-full h-10 rounded-2xl bg-background border border-card-border px-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent"
+                />
+              </div>
+            </div>
+          )}
+
           <button
             type="submit"
             disabled={
               submitting ||
               !text.trim() ||
-              (type === "poll" && pollUsesMembers && selectedMembers.length < 2)
+              (type === "poll" && pollUsesMembers && selectedMembers.length < 2) ||
+              (type === "estimate" && correctAnswer === "") ||
+              (type === "team_split" && (!teamLabel1.trim() || !teamLabel2.trim()))
             }
             className="h-12 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
           >
