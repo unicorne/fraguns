@@ -84,7 +84,7 @@ export default function FrageErgebnisse({
       <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-8 pb-12 text-center">
         <button
           onClick={() => router.push(`/gruppe/${inviteCode}`)}
-          className="text-white/70 text-sm mb-4 hover:text-white self-start block"
+          className="text-white text-base font-semibold mb-4 hover:text-white/80 self-start block"
         >
           &larr; Zurück
         </button>

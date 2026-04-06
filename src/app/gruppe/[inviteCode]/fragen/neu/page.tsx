@@ -111,7 +111,7 @@ export default function NeueFrage({
       <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-8 pb-12">
         <button
           onClick={() => router.push(`/gruppe/${inviteCode}`)}
-          className="text-white/70 text-sm mb-4 hover:text-white"
+          className="text-white text-base font-semibold mb-4 hover:text-white/80"
         >
           &larr; {groupName || "Zurück"}
         </button>

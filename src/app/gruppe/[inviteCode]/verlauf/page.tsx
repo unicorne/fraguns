@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
-import { getMemberForGroup } from "@/lib/storage";
+import { getAllGroups } from "@/lib/storage";
 
 interface Question {
   id: string;
@@ -25,17 +25,19 @@ export default function Verlauf({
 
   useEffect(() => {
     async function load() {
-      const res = await fetch(`/api/groups/${inviteCode}`);
-      if (!res.ok) return;
-      const group = await res.json();
+      // Try to get groupId from localStorage first (faster)
+      const groups = getAllGroups();
+      const stored = groups.find((g) => g.inviteCode === inviteCode);
+      let groupId = stored?.groupId;
 
-      const stored = getMemberForGroup(group.id);
-      if (!stored) {
-        router.push(`/gruppe/${inviteCode}`);
-        return;
+      if (!groupId) {
+        const res = await fetch(`/api/groups/${inviteCode}`);
+        if (!res.ok) return;
+        const group = await res.json();
+        groupId = group.id;
       }
 
-      const qRes = await fetch(`/api/questions?group_id=${group.id}`);
+      const qRes = await fetch(`/api/questions?group_id=${groupId}`);
       if (qRes.ok) {
         setQuestions(await qRes.json());
       }
@@ -65,7 +67,7 @@ export default function Verlauf({
       <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-8 pb-12">
         <button
           onClick={() => router.push(`/gruppe/${inviteCode}`)}
-          className="text-white/70 text-sm mb-4 hover:text-white"
+          className="text-white text-base font-semibold mb-4 hover:text-white/80"
         >
           &larr; Zurück
         </button>
@@ -108,7 +110,6 @@ export default function Verlauf({
           </div>
         )}
       </main>
-
     </div>
   );
 }
