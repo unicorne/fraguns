@@ -131,23 +131,31 @@ export default function GruppePage({
       });
 
       // Auto-register push subscription for this new membership
-      if ("serviceWorker" in navigator && "PushManager" in window) {
-        try {
+      try {
+        let subscription = null;
+        // Try live subscription first
+        if ("serviceWorker" in navigator && "PushManager" in window) {
           const reg = await navigator.serviceWorker.ready;
           const sub = await reg.pushManager.getSubscription();
-          if (sub) {
-            await fetch("/api/push/subscribe", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                member_id: member.id,
-                subscription: sub.toJSON(),
-              }),
-            });
-          }
-        } catch {
-          // Push not available, that's ok
+          if (sub) subscription = sub.toJSON();
         }
+        // Fallback: cached subscription from initial prompt
+        if (!subscription) {
+          const cached = localStorage.getItem("fraguns_push_subscription");
+          if (cached) subscription = JSON.parse(cached);
+        }
+        if (subscription) {
+          await fetch("/api/push/subscribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              member_id: member.id,
+              subscription,
+            }),
+          });
+        }
+      } catch {
+        // Push not available, that's ok
       }
 
       setCurrentMember({ memberId: member.id, memberName: member.name });

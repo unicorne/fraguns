@@ -32,12 +32,22 @@ export default function InitialPushPrompt({ onDone }: InitialPushPromptProps) {
       const permission = await Notification.requestPermission();
       if (permission === "granted") {
         const reg = await navigator.serviceWorker.ready;
-        await reg.pushManager.subscribe({
+        const sub = await reg.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: urlBase64ToUint8Array(
             process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
           ) as BufferSource,
         });
+
+        // Cache subscription in localStorage so it can be saved
+        // to the server when the user joins a group
+        localStorage.setItem(
+          "fraguns_push_subscription",
+          JSON.stringify(sub.toJSON())
+        );
+
+        // Also save to server for any existing memberships
+        await syncPushToServer(sub.toJSON());
       }
     } catch (e) {
       console.error("Push setup failed:", e);
@@ -84,6 +94,35 @@ export default function InitialPushPrompt({ onDone }: InitialPushPromptProps) {
       </div>
     </div>
   );
+}
+
+async function syncPushToServer(subscription: PushSubscriptionJSON) {
+  try {
+    const userStr = localStorage.getItem("fraguns_user");
+    if (!userStr) return;
+    const user = JSON.parse(userStr);
+
+    const res = await fetch(
+      `/api/users?username=${encodeURIComponent(user.username)}`
+    );
+    const data = await res.json();
+    if (data.memberships) {
+      await Promise.all(
+        data.memberships.map((m: { id: string }) =>
+          fetch("/api/push/subscribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              member_id: m.id,
+              subscription,
+            }),
+          })
+        )
+      );
+    }
+  } catch {
+    // Will sync later when joining a group
+  }
 }
 
 function urlBase64ToUint8Array(base64String: string): Uint8Array {
