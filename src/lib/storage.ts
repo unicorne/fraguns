@@ -1,10 +1,11 @@
 // Local storage helpers for member identity
 
-interface MemberInfo {
+export interface MemberInfo {
   memberId: string;
   memberName: string;
   groupId: string;
   groupName: string;
+  inviteCode: string;
 }
 
 const STORAGE_KEY = "fraguns_members";

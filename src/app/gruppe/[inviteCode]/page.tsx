@@ -63,6 +63,10 @@ export default function GruppePage({
       // Check if user is already a member
       const stored = getMemberForGroup(data.id);
       if (stored) {
+        // Backfill inviteCode if missing (for old sessions)
+        if (!stored.inviteCode) {
+          storeMember({ ...stored, inviteCode });
+        }
         setCurrentMember({
           memberId: stored.memberId,
           memberName: stored.memberName,
@@ -104,6 +108,7 @@ export default function GruppePage({
         memberName: member.name,
         groupId: group.id,
         groupName: group.name,
+        inviteCode,
       });
 
       setCurrentMember({ memberId: member.id, memberName: member.name });

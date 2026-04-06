@@ -1,11 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { getAllGroups, MemberInfo } from "@/lib/storage";
 
 export default function Home() {
   const router = useRouter();
   const [inviteCode, setInviteCode] = useState("");
+  const [groups, setGroups] = useState<MemberInfo[]>([]);
+
+  useEffect(() => {
+    setGroups(getAllGroups());
+  }, []);
 
   return (
     <div className="flex flex-col flex-1 items-center justify-center px-6">
@@ -18,6 +24,25 @@ export default function Home() {
             Tägliche Fragen für deine Freundesgruppe
           </p>
         </div>
+
+        {/* Show existing groups */}
+        {groups.length > 0 && (
+          <div className="w-full flex flex-col gap-2">
+            <p className="text-sm text-muted">Deine Gruppen</p>
+            {groups.map((g) => (
+              <button
+                key={g.groupId}
+                onClick={() => router.push(`/gruppe/${g.inviteCode}`)}
+                className="w-full bg-card rounded-xl border border-card-border p-4 text-left hover:border-accent"
+              >
+                <p className="font-medium">{g.groupName}</p>
+                <p className="text-xs text-muted mt-0.5">
+                  Angemeldet als {g.memberName}
+                </p>
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="w-full flex flex-col gap-3">
           <button
