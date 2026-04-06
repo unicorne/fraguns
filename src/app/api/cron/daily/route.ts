@@ -60,7 +60,7 @@ export async function GET(request: Request) {
           const webpush = await import("web-push");
           webpush.setVapidDetails(
             process.env.VAPID_SUBJECT!,
-            process.env.VAPID_PUBLIC_KEY!,
+            process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
             process.env.VAPID_PRIVATE_KEY!
           );
 
@@ -69,17 +69,20 @@ export async function GET(request: Request) {
             body: "Neue Frage! Schau vorbei und antworte.",
           });
 
-          await Promise.allSettled(
+          const results = await Promise.allSettled(
             members.map((m) =>
               webpush.sendNotification(m.push_subscription, payload)
             )
           );
+          console.log("Push results:", results.map((r) => r.status));
         } catch (e) {
           console.error("Push error:", e);
         }
+      } else {
+        console.log("No push subscriptions found for group", group.id);
       }
     }
   }
 
-  return NextResponse.json({ success: true, date: today });
+  return NextResponse.json({ success: true, date: today, groups: groups.length });
 }
