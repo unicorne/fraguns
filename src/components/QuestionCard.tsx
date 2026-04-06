@@ -7,6 +7,7 @@ import ScaleAnswer from "./answers/ScaleAnswer";
 import PollResults from "./results/PollResults";
 import TextResults from "./results/TextResults";
 import ScaleResults from "./results/ScaleResults";
+import QuestionRating from "./QuestionRating";
 
 interface Answer {
   value: Record<string, unknown>;
@@ -119,6 +120,8 @@ export default function QuestionCard({
             config={question.config}
           />
         )}
+
+        <QuestionRating questionId={question.id} memberId={memberId} />
       </div>
     );
   }
