@@ -11,6 +11,7 @@ import {
   UserInfo,
 } from "@/lib/storage";
 import { AvatarGroup } from "@/components/Avatar";
+import InitialPushPrompt from "@/components/InitialPushPrompt";
 
 export default function Home() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function Home() {
   const [groups, setGroups] = useState<MemberInfo[]>([]);
   const [username, setUsername] = useState("");
   const [inviteCode, setInviteCode] = useState("");
-  const [mode, setMode] = useState<"loading" | "register" | "dashboard">(
+  const [mode, setMode] = useState<"loading" | "register" | "push-prompt" | "dashboard">(
     "loading"
   );
   const [error, setError] = useState("");
@@ -77,7 +78,7 @@ export default function Home() {
         );
         setAllMembers(memberships);
         setGroups(memberships);
-        setMode("dashboard");
+        showPushOrDashboard();
       } else {
         // Register: create new user
         const res = await fetch("/api/users", {
@@ -93,7 +94,7 @@ export default function Home() {
 
         storeUser({ userId: data.id, username: data.username });
         setUser({ userId: data.id, username: data.username });
-        setMode("dashboard");
+        showPushOrDashboard();
       }
     } catch {
       setError("Verbindungsfehler");
@@ -102,11 +103,32 @@ export default function Home() {
     }
   }
 
+  function showPushOrDashboard() {
+    const alreadyPrompted = typeof window !== "undefined" && localStorage.getItem("fraguns_push_prompted");
+    if (!alreadyPrompted) {
+      setMode("push-prompt");
+    } else {
+      setMode("dashboard");
+    }
+  }
+
   if (mode === "loading") {
     return (
       <div className="flex flex-1 items-center justify-center min-h-screen">
         <div className="text-muted">Laden...</div>
       </div>
+    );
+  }
+
+  // Push notification prompt (shown after registration)
+  if (mode === "push-prompt") {
+    return (
+      <>
+        <InitialPushPrompt onDone={() => setMode("dashboard")} />
+        <div className="flex flex-1 items-center justify-center min-h-screen">
+          <div className="text-muted">...</div>
+        </div>
+      </>
     );
   }
 
@@ -187,8 +209,8 @@ export default function Home() {
             FragUns
           </h1>
           <button
-            onClick={() => router.push("/profil")}
-            className="text-white/70 text-sm hover:text-white"
+            onClick={() => router.push("/einstellungen")}
+            className="text-white bg-white/20 text-sm font-semibold px-3 py-1.5 rounded-xl hover:bg-white/30"
           >
             @{user?.username}
           </button>

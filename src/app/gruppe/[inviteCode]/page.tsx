@@ -4,7 +4,7 @@ import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { getMemberForGroup, storeMember, getStoredUser } from "@/lib/storage";
 import QuestionCard from "@/components/QuestionCard";
-import PushPermission from "@/components/PushPermission";
+// Push notifications are now handled globally via /einstellungen
 import { AvatarGroup } from "@/components/Avatar";
 import Countdown from "@/components/Countdown";
 
@@ -129,6 +129,26 @@ export default function GruppePage({
         groupName: group.name,
         inviteCode,
       });
+
+      // Auto-register push subscription for this new membership
+      if ("serviceWorker" in navigator && "PushManager" in window) {
+        try {
+          const reg = await navigator.serviceWorker.ready;
+          const sub = await reg.pushManager.getSubscription();
+          if (sub) {
+            await fetch("/api/push/subscribe", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                member_id: member.id,
+                subscription: sub.toJSON(),
+              }),
+            });
+          }
+        } catch {
+          // Push not available, that's ok
+        }
+      }
 
       setCurrentMember({ memberId: member.id, memberName: member.name });
       fetchGroup();
@@ -323,9 +343,6 @@ export default function GruppePage({
             Verlauf
           </button>
         </div>
-
-        {/* Push notification prompt */}
-        <PushPermission memberId={currentMember.memberId} />
 
         {/* Test: manually trigger next question */}
         <button

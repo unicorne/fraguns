@@ -7,7 +7,9 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { data: groups } = await supabaseAdmin.from("groups").select("id");
+  const { data: groups } = await supabaseAdmin
+    .from("groups")
+    .select("id, name, invite_code");
 
   if (!groups) {
     return NextResponse.json({ message: "Keine Gruppen" });
@@ -15,6 +17,14 @@ export async function GET(request: Request) {
 
   const today = new Date().toISOString().split("T")[0];
   const log: string[] = [];
+
+  // Set up web-push once
+  const webpush = await import("web-push");
+  webpush.setVapidDetails(
+    process.env.VAPID_SUBJECT!.trim(),
+    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!.trim().replace(/=+$/, ""),
+    process.env.VAPID_PRIVATE_KEY!.trim().replace(/=+$/, "")
+  );
 
   for (const group of groups) {
     // Deactivate current active question
@@ -35,7 +45,7 @@ export async function GET(request: Request) {
       .single();
 
     if (!nextQuestion) {
-      log.push(`group ${group.id.slice(0, 8)}: no questions in queue`);
+      log.push(`group ${group.name}: no questions in queue`);
       continue;
     }
 
@@ -50,9 +60,9 @@ export async function GET(request: Request) {
       })
       .eq("id", nextQuestion.id);
 
-    log.push(`group ${group.id.slice(0, 8)}: activated "${nextQuestion.text.slice(0, 30)}..."`);
+    log.push(`group ${group.name}: activated "${nextQuestion.text.slice(0, 30)}..."`);
 
-    // Send push notifications
+    // Send push notifications — one per member with group-specific link
     const { data: members } = await supabaseAdmin
       .from("members")
       .select("push_subscription")
@@ -66,36 +76,33 @@ export async function GET(request: Request) {
 
     log.push(`  push: ${members.length} subscription(s)`);
 
-    try {
-      const webpush = await import("web-push");
-      webpush.setVapidDetails(
-        process.env.VAPID_SUBJECT!.trim(),
-        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!.trim().replace(/=+$/, ""),
-        process.env.VAPID_PRIVATE_KEY!.trim().replace(/=+$/, "")
-      );
+    const payload = JSON.stringify({
+      title: `${group.name}`,
+      body: nextQuestion.text,
+      url: `/gruppe/${group.invite_code}`,
+    });
 
-      const payload = JSON.stringify({
-        title: "FragUns",
-        body: "Neue Frage! Schau vorbei und antworte.",
-      });
+    const results = await Promise.allSettled(
+      members.map((m) =>
+        webpush.sendNotification(m.push_subscription, payload)
+      )
+    );
 
-      const results = await Promise.allSettled(
-        members.map((m) =>
-          webpush.sendNotification(m.push_subscription, payload)
-        )
-      );
-
-      for (const r of results) {
-        if (r.status === "fulfilled") {
-          log.push(`  push: sent (${r.value.statusCode})`);
-        } else {
-          log.push(`  push: failed (${r.reason?.statusCode || r.reason?.message || "unknown"})`);
-        }
+    for (const r of results) {
+      if (r.status === "fulfilled") {
+        log.push(`  push: sent (${r.value.statusCode})`);
+      } else {
+        log.push(
+          `  push: failed (${r.reason?.statusCode || r.reason?.message || "unknown"})`
+        );
       }
-    } catch (e) {
-      log.push(`  push: error (${e instanceof Error ? e.message : "unknown"})`);
     }
   }
 
-  return NextResponse.json({ success: true, date: today, groups: groups.length, log });
+  return NextResponse.json({
+    success: true,
+    date: today,
+    groups: groups.length,
+    log,
+  });
 }
