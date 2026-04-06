@@ -39,7 +39,7 @@ export default function GruppeErstellen() {
       <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-10 pb-12">
         <button
           onClick={() => router.push("/")}
-          className="text-white text-base font-semibold mb-4 hover:text-white/80"
+          className="text-white bg-white/20 text-sm font-semibold px-3 py-1.5 rounded-xl hover:bg-white/30 mb-4"
         >
           &larr; Zurück
         </button>

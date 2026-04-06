@@ -133,7 +133,7 @@ export default function ProfilPage() {
       <div className="bg-gradient-to-b from-accent to-accent-light px-6 pt-8 pb-16 text-center">
         <button
           onClick={() => router.push("/")}
-          className="text-white text-base font-semibold mb-4 hover:text-white/80 self-start block"
+          className="text-white bg-white/20 text-sm font-semibold px-3 py-1.5 rounded-xl hover:bg-white/30 mb-4 inline-block"
         >
           &larr; Zurück
         </button>
