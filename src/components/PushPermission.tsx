@@ -68,7 +68,7 @@ export default function PushPermission({ memberId }: PushPermissionProps) {
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(
           process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
-        ),
+        ) as BufferSource,
       });
 
       const res = await fetch("/api/push/subscribe", {
