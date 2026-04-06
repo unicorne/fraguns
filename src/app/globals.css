@@ -39,3 +39,14 @@ body {
 button, a, input, textarea {
   transition: all 0.15s ease;
 }
+
+/* Global button press feedback */
+button:active:not(:disabled) {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* Tap highlight color for mobile */
+button, a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}

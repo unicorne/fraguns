@@ -311,8 +311,9 @@ export default function GruppePage({
             <button
               onClick={() => {
                 navigator.clipboard.writeText(group.invite_code);
+                setShowInvite(false);
               }}
-              className="text-sm px-4 py-2 rounded-xl bg-accent text-white font-semibold"
+              className="text-sm px-4 py-2 rounded-xl bg-accent text-white font-semibold active:bg-accent-dark active:scale-95 transition-all"
             >
               Kopieren
             </button>
