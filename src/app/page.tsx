@@ -47,13 +47,24 @@ export default function Home() {
       if (res.ok) {
         const data = await res.json();
         const status: Record<string, boolean> = {};
+        const serverGroups: MemberInfo[] = [];
         for (const g of data) {
           status[g.groupId] = g.hasUnanswered;
+          serverGroups.push({
+            memberId: g.memberId,
+            memberName: g.memberName,
+            groupId: g.groupId,
+            groupName: g.groupName,
+            inviteCode: g.inviteCode,
+          });
         }
         setGroupStatus(status);
+        // Sync localStorage with server data
+        setAllMembers(serverGroups);
+        setGroups(serverGroups);
       }
     } catch {
-      // Silent fail
+      // Silent fail — use localStorage as fallback
     }
   }
 
