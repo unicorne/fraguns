@@ -19,6 +19,7 @@ import RankingAnswer from "./answers/RankingAnswer";
 import RankingResults from "./results/RankingResults";
 import QuestionRating from "./QuestionRating";
 import { CardSkeleton } from "./LoadingSpinner";
+import Comments from "./Comments";
 
 interface Answer {
   value: Record<string, unknown>;
@@ -158,6 +159,7 @@ export default function QuestionCard({
         )}
 
         <QuestionRating questionId={question.id} memberId={memberId} />
+        <Comments questionId={question.id} memberId={memberId} />
       </div>
     );
   }

@@ -7,6 +7,7 @@ import PollResults from "@/components/results/PollResults";
 import TextResults from "@/components/results/TextResults";
 import ScaleResults from "@/components/results/ScaleResults";
 import { FullPageSpinner } from "@/components/LoadingSpinner";
+import Comments from "@/components/Comments";
 import EstimateResults from "@/components/results/EstimateResults";
 import TimelineResults from "@/components/results/TimelineResults";
 import TwoTruthsOneLieResults from "@/components/results/TwoTruthsOneLieResults";
@@ -176,6 +177,10 @@ export default function FrageErgebnisse({
                 answers={results.answers || []}
                 groupMembers={groupMembers}
               />
+            )}
+
+            {memberId && (
+              <Comments questionId={questionId} memberId={memberId} />
             )}
           </div>
         )}
