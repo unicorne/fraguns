@@ -150,6 +150,7 @@ export default function QuestionCard({
           <TeamSplitResults
             answers={results.answers || []}
             config={question.config}
+            groupMembers={members}
           />
         )}
         {question.type === "ranking" && (
@@ -207,6 +208,7 @@ export default function QuestionCard({
       {question.type === "team_split" && (
         <TeamSplitAnswer
           config={question.config}
+          members={members}
           onAnswer={handleAnswer}
           submitting={submitting}
         />

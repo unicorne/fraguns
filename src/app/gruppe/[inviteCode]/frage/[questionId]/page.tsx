@@ -171,6 +171,7 @@ export default function FrageErgebnisse({
               <TeamSplitResults
                 answers={results.answers || []}
                 config={results.question.config}
+                groupMembers={groupMembers}
               />
             )}
             {results.question.type === "ranking" && (
