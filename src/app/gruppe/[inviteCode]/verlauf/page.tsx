@@ -10,6 +10,7 @@ interface Question {
   type: string;
   scheduled_date: string | null;
   is_active: boolean;
+  created_at: string;
   answers: { count: number }[];
 }
 
@@ -48,11 +49,15 @@ export default function Verlauf({
 
   const past = questions
     .filter((q) => q.scheduled_date && !q.is_active)
-    .sort(
-      (a, b) =>
+    .sort((a, b) => {
+      const dateDiff =
         new Date(b.scheduled_date!).getTime() -
-        new Date(a.scheduled_date!).getTime()
-    );
+        new Date(a.scheduled_date!).getTime();
+      if (dateDiff !== 0) return dateDiff;
+      return (
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+    });
 
   if (loading) {
     return (
@@ -99,7 +104,15 @@ export default function Verlauf({
                       ? "Abstimmung"
                       : q.type === "text"
                         ? "Freitext"
-                        : "Skala"}
+                        : q.type === "scale"
+                          ? "Skala"
+                          : q.type === "estimate"
+                            ? "Schätzfrage"
+                            : q.type === "team_split"
+                              ? "Team-Aufteilung"
+                              : q.type === "ranking"
+                                ? "Ranking"
+                                : q.type}
                   </span>
                   <span className="text-xs text-muted">
                     {q.answers?.[0]?.count || 0} Antworten
