@@ -31,6 +31,7 @@ export default function NeueFrage({
   const [unit, setUnit] = useState("");
   const [teamLabel1, setTeamLabel1] = useState("");
   const [teamLabel2, setTeamLabel2] = useState("");
+  const [isAnonymous, setIsAnonymous] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [groupId, setGroupId] = useState<string | null>(null);
   const [memberId, setMemberId] = useState<string | null>(null);
@@ -85,6 +86,10 @@ export default function NeueFrage({
       config = { correct_answer: Number(correctAnswer), unit: unit || undefined };
     } else if (type === "team_split") {
       config = { team_labels: [teamLabel1.trim(), teamLabel2.trim()] };
+    }
+
+    if (isAnonymous) {
+      config.is_anonymous = true;
     }
 
     try {
@@ -360,6 +365,35 @@ export default function NeueFrage({
               </div>
             </div>
           )}
+
+          {/* Anonymous toggle */}
+          <button
+            type="button"
+            onClick={() => setIsAnonymous(!isAnonymous)}
+            className={`flex items-center gap-3 px-4 py-3 rounded-2xl border transition-colors ${
+              isAnonymous
+                ? "border-accent bg-accent/10"
+                : "border-card-border bg-background"
+            }`}
+          >
+            <div
+              className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 ${
+                isAnonymous
+                  ? "bg-accent border-accent"
+                  : "border-card-border"
+              }`}
+            >
+              {isAnonymous && (
+                <span className="text-white text-xs">✓</span>
+              )}
+            </div>
+            <div className="text-left">
+              <span className="text-sm font-medium">Anonyme Frage</span>
+              <p className="text-xs text-muted">
+                Antworten werden ohne Namen angezeigt
+              </p>
+            </div>
+          </button>
 
           <button
             type="submit"

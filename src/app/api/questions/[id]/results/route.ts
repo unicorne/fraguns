@@ -78,6 +78,16 @@ export async function GET(
     );
   }
 
+  // Anonymize answers if question is anonymous
+  if (question.config?.is_anonymous) {
+    answersData = answersData.map(
+      (a: { value: Record<string, unknown>; members: { id: string; name: string } }, i: number) => ({
+        ...a,
+        members: { id: `anon-${i}`, name: `Anonym ${i + 1}` },
+      })
+    );
+  }
+
   return NextResponse.json({
     revealed: true,
     question: {
