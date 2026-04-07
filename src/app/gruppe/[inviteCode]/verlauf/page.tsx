@@ -3,6 +3,7 @@
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { getAllGroups } from "@/lib/storage";
+import { FullPageSpinner } from "@/components/LoadingSpinner";
 
 interface Question {
   id: string;
@@ -60,11 +61,7 @@ export default function Verlauf({
     });
 
   if (loading) {
-    return (
-      <div className="flex flex-1 items-center justify-center min-h-screen">
-        <div className="text-muted">Laden...</div>
-      </div>
-    );
+    return <FullPageSpinner />;
   }
 
   return (

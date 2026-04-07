@@ -12,6 +12,7 @@ import {
 } from "@/lib/storage";
 import { AvatarGroup } from "@/components/Avatar";
 import InitialPushPrompt from "@/components/InitialPushPrompt";
+import { FullPageSpinner } from "@/components/LoadingSpinner";
 
 export default function Home() {
   const router = useRouter();
@@ -144,11 +145,7 @@ export default function Home() {
   }
 
   if (mode === "loading") {
-    return (
-      <div className="flex flex-1 items-center justify-center min-h-screen">
-        <div className="text-muted">Laden...</div>
-      </div>
-    );
+    return <FullPageSpinner />;
   }
 
   // Push notification prompt (shown after registration)

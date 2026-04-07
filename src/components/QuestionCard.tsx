@@ -18,6 +18,7 @@ import TeamSplitResults from "./results/TeamSplitResults";
 import RankingAnswer from "./answers/RankingAnswer";
 import RankingResults from "./results/RankingResults";
 import QuestionRating from "./QuestionRating";
+import { CardSkeleton } from "./LoadingSpinner";
 
 interface Answer {
   value: Record<string, unknown>;
@@ -99,11 +100,7 @@ export default function QuestionCard({
   }
 
   if (loading) {
-    return (
-      <div className="bg-card rounded-2xl border border-card-border p-6 text-center shadow-sm">
-        <p className="text-muted">Laden...</p>
-      </div>
-    );
+    return <CardSkeleton />;
   }
 
   // Already answered — show results

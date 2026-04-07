@@ -6,6 +6,7 @@ import { getMemberForGroup } from "@/lib/storage";
 import PollResults from "@/components/results/PollResults";
 import TextResults from "@/components/results/TextResults";
 import ScaleResults from "@/components/results/ScaleResults";
+import { FullPageSpinner } from "@/components/LoadingSpinner";
 import EstimateResults from "@/components/results/EstimateResults";
 import TimelineResults from "@/components/results/TimelineResults";
 import TwoTruthsOneLieResults from "@/components/results/TwoTruthsOneLieResults";
@@ -75,11 +76,7 @@ export default function FrageErgebnisse({
   }
 
   if (loading) {
-    return (
-      <div className="flex flex-1 items-center justify-center min-h-screen">
-        <div className="text-muted">Laden...</div>
-      </div>
-    );
+    return <FullPageSpinner />;
   }
 
   if (!results) return null;

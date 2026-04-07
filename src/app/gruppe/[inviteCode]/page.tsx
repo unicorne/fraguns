@@ -7,6 +7,7 @@ import QuestionCard from "@/components/QuestionCard";
 // Push notifications are now handled globally via /einstellungen
 import { AvatarGroup } from "@/components/Avatar";
 import Countdown from "@/components/Countdown";
+import { FullPageSpinner } from "@/components/LoadingSpinner";
 
 interface Member {
   id: string;
@@ -168,11 +169,7 @@ export default function GruppePage({
   }
 
   if (loading) {
-    return (
-      <div className="flex flex-1 items-center justify-center min-h-screen">
-        <div className="text-muted">Laden...</div>
-      </div>
-    );
+    return <FullPageSpinner />;
   }
 
   if (!group) return null;
