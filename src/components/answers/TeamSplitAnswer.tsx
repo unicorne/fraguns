@@ -24,8 +24,25 @@ export default function TeamSplitAnswer({
   const teamARef = useRef<HTMLDivElement>(null);
   const teamBRef = useRef<HTMLDivElement>(null);
 
+  const maxPerTeam = Math.ceil(members.length / 2);
+  const minPerTeam = Math.floor(members.length / 2);
+
+  function getTeamCount(prev: Record<string, number>, team: number, excludeId?: string) {
+    return Object.entries(prev).filter(
+      ([id, t]) => t === team && id !== excludeId
+    ).length;
+  }
+
+  function canAssign(prev: Record<string, number>, memberId: string, team: number) {
+    const countInTeam = getTeamCount(prev, team, memberId);
+    return countInTeam < maxPerTeam;
+  }
+
   function assignMember(memberId: string, team: number) {
-    setAssignments((prev) => ({ ...prev, [memberId]: team }));
+    setAssignments((prev) => {
+      if (!canAssign(prev, memberId, team)) return prev;
+      return { ...prev, [memberId]: team };
+    });
   }
 
   function unassignMember(memberId: string) {
@@ -72,11 +89,14 @@ export default function TeamSplitAnswer({
   const team0 = members.filter((m) => assignments[m.id] === 0);
   const team1 = members.filter((m) => assignments[m.id] === 1);
   const unassigned = members.filter((m) => assignments[m.id] === undefined);
+  const team0Full = team0.length >= maxPerTeam;
+  const team1Full = team1.length >= maxPerTeam;
+  const isEven = allAssigned && Math.abs(team0.length - team1.length) <= 1;
 
   return (
     <div className="flex flex-col gap-4">
       <p className="text-sm text-muted text-center">
-        Teile alle Mitglieder in zwei Gruppen ein!
+        Teile alle Mitglieder gleichmäßig auf! ({minPerTeam}:{maxPerTeam})
       </p>
 
       {/* Drop zones */}
@@ -91,7 +111,7 @@ export default function TeamSplitAnswer({
           }`}
         >
           <h3 className="text-xs font-bold text-blue-600 text-center py-1">
-            {teamLabels[0]}
+            {teamLabels[0]} ({team0.length}/{maxPerTeam})
           </h3>
           {team0.map((m) => (
             <button
@@ -126,7 +146,7 @@ export default function TeamSplitAnswer({
           }`}
         >
           <h3 className="text-xs font-bold text-red-500 text-center py-1">
-            {teamLabels[1]}
+            {teamLabels[1]} ({team1.length}/{maxPerTeam})
           </h3>
           {team1.map((m) => (
             <button
@@ -174,14 +194,16 @@ export default function TeamSplitAnswer({
                 <button
                   type="button"
                   onClick={() => assignMember(m.id, 0)}
-                  className="px-3 py-2 rounded-xl text-xs font-bold bg-blue-500/10 text-blue-600 border border-blue-500/20 min-w-[44px]"
+                  disabled={team0Full}
+                  className="px-3 py-2 rounded-xl text-xs font-bold bg-blue-500/10 text-blue-600 border border-blue-500/20 min-w-[44px] disabled:opacity-30"
                 >
                   {teamLabels[0]}
                 </button>
                 <button
                   type="button"
                   onClick={() => assignMember(m.id, 1)}
-                  className="px-3 py-2 rounded-xl text-xs font-bold bg-red-400/10 text-red-500 border border-red-400/20 min-w-[44px]"
+                  disabled={team1Full}
+                  className="px-3 py-2 rounded-xl text-xs font-bold bg-red-400/10 text-red-500 border border-red-400/20 min-w-[44px] disabled:opacity-30"
                 >
                   {teamLabels[1]}
                 </button>
@@ -193,7 +215,7 @@ export default function TeamSplitAnswer({
 
       <button
         onClick={() => onAnswer({ assignments })}
-        disabled={submitting || !allAssigned}
+        disabled={submitting || !allAssigned || !isEven}
         className="h-11 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
       >
         {submitting
