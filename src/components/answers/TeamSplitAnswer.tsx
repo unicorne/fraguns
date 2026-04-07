@@ -101,7 +101,7 @@ export default function TeamSplitAnswer({
               onTouchStart={() => handleTouchStart(m.id)}
               onTouchMove={(e) => handleTouchMove(e)}
               onTouchEnd={handleTouchEnd}
-              className={`flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-xl px-2.5 py-2 transition-all select-none ${
+              className={`flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-xl px-2.5 py-2 transition-all select-none touch-none ${
                 draggingId === m.id ? "opacity-50 scale-95" : ""
               }`}
             >
@@ -136,7 +136,7 @@ export default function TeamSplitAnswer({
               onTouchStart={() => handleTouchStart(m.id)}
               onTouchMove={(e) => handleTouchMove(e)}
               onTouchEnd={handleTouchEnd}
-              className={`flex items-center gap-2 bg-red-400/10 border border-red-400/20 rounded-xl px-2.5 py-2 transition-all select-none ${
+              className={`flex items-center gap-2 bg-red-400/10 border border-red-400/20 rounded-xl px-2.5 py-2 transition-all select-none touch-none ${
                 draggingId === m.id ? "opacity-50 scale-95" : ""
               }`}
             >
@@ -164,25 +164,24 @@ export default function TeamSplitAnswer({
               onTouchStart={() => handleTouchStart(m.id)}
               onTouchMove={(e) => handleTouchMove(e)}
               onTouchEnd={handleTouchEnd}
-              className={`flex items-center gap-3 bg-background border border-card-border rounded-xl px-3 py-2.5 select-none transition-all ${
+              className={`flex items-center gap-3 bg-background border border-card-border rounded-xl px-3 py-3 select-none touch-none transition-all ${
                 draggingId === m.id ? "opacity-50 scale-95" : ""
               }`}
             >
-              <span className="text-muted text-sm touch-none">⠿</span>
               <Avatar name={m.name} size="sm" />
               <span className="text-sm font-medium flex-1">{m.name}</span>
-              <div className="flex gap-1">
+              <div className="flex gap-1.5">
                 <button
                   type="button"
                   onClick={() => assignMember(m.id, 0)}
-                  className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-blue-500/10 text-blue-600 border border-blue-500/20"
+                  className="px-3 py-2 rounded-xl text-xs font-bold bg-blue-500/10 text-blue-600 border border-blue-500/20 min-w-[44px]"
                 >
                   {teamLabels[0]}
                 </button>
                 <button
                   type="button"
                   onClick={() => assignMember(m.id, 1)}
-                  className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-red-400/10 text-red-500 border border-red-400/20"
+                  className="px-3 py-2 rounded-xl text-xs font-bold bg-red-400/10 text-red-500 border border-red-400/20 min-w-[44px]"
                 >
                   {teamLabels[1]}
                 </button>
