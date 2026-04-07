@@ -158,20 +158,20 @@ export default function RankingAnswer({
     <div className="flex flex-col gap-4" ref={containerRef}>
       {/* Ranked list */}
       <div className="flex flex-col gap-1" ref={rankedRef}>
-        <p className="text-xs text-muted mb-1">Dein Ranking:</p>
+        <p className="text-sm text-muted mb-1">Dein Ranking:</p>
 
         {ranked.length === 0 && isDragging && (
           <div
             data-rank-item
             className="flex items-center justify-center rounded-xl px-3 py-4 border-2 border-dashed border-accent/40 bg-accent/5"
           >
-            <span className="text-xs text-accent">Hier ablegen</span>
+            <span className="text-sm text-accent">Hier ablegen</span>
           </div>
         )}
 
         {ranked.length === 0 && !isDragging && (
           <div className="flex items-center justify-center rounded-xl px-3 py-4 border border-dashed border-card-border">
-            <span className="text-xs text-muted">
+            <span className="text-sm text-muted">
               Tippe oder ziehe Mitglieder hierher
             </span>
           </div>
@@ -198,18 +198,18 @@ export default function RankingAnswer({
                 data-rank-item
                 onTouchStart={() => handleRankedTouchStart(i)}
                 onTouchEnd={handleTouchEnd}
-                className={`flex items-center gap-2 rounded-xl px-3 py-2.5 transition-all select-none touch-none ${
+                className={`flex items-center gap-2 rounded-xl px-3 py-3 transition-all select-none touch-none ${
                   draggingMemberId === member.id
                     ? "bg-accent/20 border-2 border-accent scale-[1.02] shadow-lg z-10 relative"
                     : "bg-accent/10 border border-accent/20"
                 }`}
               >
                 <span className="text-muted text-sm">⠿</span>
-                <span className="text-sm font-bold text-accent w-6 text-center">
+                <span className="text-base font-bold text-accent w-7 text-center">
                   {i + 1}.
                 </span>
                 <Avatar name={member.name} size="sm" />
-                <span className="text-sm font-medium flex-1">
+                <span className="text-base font-medium flex-1">
                   {member.name}
                 </span>
                 <div className="flex gap-1">
@@ -217,7 +217,7 @@ export default function RankingAnswer({
                     type="button"
                     onClick={() => moveUp(i)}
                     disabled={i === 0}
-                    className="w-7 h-7 rounded-lg bg-background border border-card-border text-xs disabled:opacity-30"
+                    className="w-8 h-8 rounded-lg bg-background border border-card-border text-sm disabled:opacity-30"
                   >
                     ↑
                   </button>
@@ -225,14 +225,14 @@ export default function RankingAnswer({
                     type="button"
                     onClick={() => moveDown(i)}
                     disabled={i === ranked.length - 1}
-                    className="w-7 h-7 rounded-lg bg-background border border-card-border text-xs disabled:opacity-30"
+                    className="w-8 h-8 rounded-lg bg-background border border-card-border text-sm disabled:opacity-30"
                   >
                     ↓
                   </button>
                   <button
                     type="button"
                     onClick={() => removeFromRanking(member.id)}
-                    className="w-7 h-7 rounded-lg bg-red-50 border border-red-200 text-red-500 text-xs shrink-0"
+                    className="w-8 h-8 rounded-lg bg-red-50 border border-red-200 text-red-500 text-sm shrink-0"
                   >
                     ×
                   </button>
@@ -249,7 +249,7 @@ export default function RankingAnswer({
       {/* Unranked members to pick from */}
       {unranked.length > 0 && (
         <div className="flex flex-col gap-1">
-          <p className="text-xs text-muted mb-1">
+          <p className="text-sm text-muted mb-1">
             Tippe oder ziehe nach oben:
           </p>
           {unranked.map((member) => (
@@ -266,7 +266,7 @@ export default function RankingAnswer({
             >
               <span className="text-muted text-sm">⠿</span>
               <Avatar name={member.name} size="sm" />
-              <span className="text-sm font-medium">{member.name}</span>
+              <span className="text-base font-medium">{member.name}</span>
             </div>
           ))}
         </div>
@@ -275,7 +275,7 @@ export default function RankingAnswer({
       <button
         onClick={() => onAnswer({ ranking: ranked.map((m) => m.id) })}
         disabled={submitting || ranked.length !== members.length}
-        className="h-11 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
+        className="h-12 rounded-2xl bg-accent text-white text-base font-semibold hover:bg-accent-dark disabled:opacity-50"
       >
         {submitting
           ? "Sende..."

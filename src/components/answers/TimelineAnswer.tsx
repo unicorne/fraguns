@@ -37,7 +37,7 @@ export default function TimelineAnswer({
       <button
         onClick={() => onAnswer({ year })}
         disabled={submitting}
-        className="h-11 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
+        className="h-12 rounded-2xl bg-accent text-white text-base font-semibold hover:bg-accent-dark disabled:opacity-50"
       >
         {submitting ? "Sende..." : "Absenden"}
       </button>

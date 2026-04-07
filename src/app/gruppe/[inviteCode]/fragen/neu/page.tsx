@@ -148,7 +148,7 @@ export default function NeueFrage({
                   key={t.key}
                   type="button"
                   onClick={() => setType(t.key)}
-                  className={`py-2.5 rounded-2xl text-xs font-semibold border ${
+                  className={`py-3 rounded-2xl text-sm font-semibold border ${
                     type === t.key
                       ? "bg-accent text-white border-accent"
                       : "bg-background border-card-border text-muted"

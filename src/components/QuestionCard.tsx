@@ -110,7 +110,7 @@ export default function QuestionCard({
   if (results?.revealed) {
     return (
       <div className="bg-card rounded-2xl border border-card-border p-5 shadow-sm">
-        <p className="text-xs text-muted mb-4 text-center">
+        <p className="text-sm text-muted mb-4 text-center">
           {results.answers?.length || 0} von {results.total} haben geantwortet
         </p>
 

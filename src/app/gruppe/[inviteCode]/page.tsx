@@ -341,13 +341,13 @@ export default function GruppePage({
         <div className="flex gap-3 mt-4">
           <button
             onClick={() => router.push(`/gruppe/${inviteCode}/fragen/neu`)}
-            className="flex-1 h-11 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark active:scale-[0.98]"
+            className="flex-1 h-12 rounded-2xl bg-accent text-white text-base font-semibold hover:bg-accent-dark active:scale-[0.98]"
           >
             + Neue Frage
           </button>
           <button
             onClick={() => router.push(`/gruppe/${inviteCode}/verlauf`)}
-            className="h-11 px-5 rounded-2xl bg-card border border-card-border text-foreground font-semibold hover:border-accent active:scale-[0.98]"
+            className="h-12 px-5 rounded-2xl bg-card border border-card-border text-foreground text-base font-semibold hover:border-accent active:scale-[0.98]"
           >
             Verlauf
           </button>

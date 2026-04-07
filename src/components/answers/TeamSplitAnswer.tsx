@@ -95,7 +95,7 @@ export default function TeamSplitAnswer({
 
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-sm text-muted text-center">
+      <p className="text-base text-muted text-center">
         Teile alle Mitglieder gleichmäßig auf! ({minPerTeam}:{maxPerTeam})
       </p>
 
@@ -110,7 +110,7 @@ export default function TeamSplitAnswer({
               : "border-blue-500/20 bg-blue-500/5"
           }`}
         >
-          <h3 className="text-xs font-bold text-blue-600 text-center py-1">
+          <h3 className="text-sm font-bold text-blue-600 text-center py-1.5">
             {teamLabels[0]} ({team0.length}/{maxPerTeam})
           </h3>
           {team0.map((m) => (
@@ -121,17 +121,17 @@ export default function TeamSplitAnswer({
               onTouchStart={() => handleTouchStart(m.id)}
               onTouchMove={(e) => handleTouchMove(e)}
               onTouchEnd={handleTouchEnd}
-              className={`flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-xl px-2.5 py-2 transition-all select-none touch-none ${
+              className={`flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-xl px-3 py-2.5 transition-all select-none touch-none ${
                 draggingId === m.id ? "opacity-50 scale-95" : ""
               }`}
             >
               <Avatar name={m.name} size="sm" />
-              <span className="text-xs font-medium flex-1 text-left">{m.name}</span>
+              <span className="text-sm font-medium flex-1 text-left">{m.name}</span>
             </button>
           ))}
           {team0.length === 0 && !draggingId && (
             <div className="flex-1 flex items-center justify-center">
-              <p className="text-xs text-muted py-4">Hierher ziehen</p>
+              <p className="text-sm text-muted py-4">Hierher ziehen</p>
             </div>
           )}
         </div>
@@ -145,7 +145,7 @@ export default function TeamSplitAnswer({
               : "border-red-400/20 bg-red-400/5"
           }`}
         >
-          <h3 className="text-xs font-bold text-red-500 text-center py-1">
+          <h3 className="text-sm font-bold text-red-500 text-center py-1.5">
             {teamLabels[1]} ({team1.length}/{maxPerTeam})
           </h3>
           {team1.map((m) => (
@@ -156,17 +156,17 @@ export default function TeamSplitAnswer({
               onTouchStart={() => handleTouchStart(m.id)}
               onTouchMove={(e) => handleTouchMove(e)}
               onTouchEnd={handleTouchEnd}
-              className={`flex items-center gap-2 bg-red-400/10 border border-red-400/20 rounded-xl px-2.5 py-2 transition-all select-none touch-none ${
+              className={`flex items-center gap-2 bg-red-400/10 border border-red-400/20 rounded-xl px-3 py-2.5 transition-all select-none touch-none ${
                 draggingId === m.id ? "opacity-50 scale-95" : ""
               }`}
             >
               <Avatar name={m.name} size="sm" />
-              <span className="text-xs font-medium flex-1 text-left">{m.name}</span>
+              <span className="text-sm font-medium flex-1 text-left">{m.name}</span>
             </button>
           ))}
           {team1.length === 0 && !draggingId && (
             <div className="flex-1 flex items-center justify-center">
-              <p className="text-xs text-muted py-4">Hierher ziehen</p>
+              <p className="text-sm text-muted py-4">Hierher ziehen</p>
             </div>
           )}
         </div>
@@ -175,7 +175,7 @@ export default function TeamSplitAnswer({
       {/* Unassigned members */}
       {unassigned.length > 0 && (
         <div className="flex flex-col gap-1">
-          <p className="text-xs text-muted mb-1">
+          <p className="text-sm text-muted mb-1">
             Tippe oder ziehe in ein Team ({unassigned.length} übrig):
           </p>
           {unassigned.map((m) => (
@@ -195,7 +195,7 @@ export default function TeamSplitAnswer({
                   type="button"
                   onClick={() => assignMember(m.id, 0)}
                   disabled={team0Full}
-                  className="px-3 py-2 rounded-xl text-xs font-bold bg-blue-500/10 text-blue-600 border border-blue-500/20 min-w-[44px] disabled:opacity-30"
+                  className="px-3 py-2.5 rounded-xl text-sm font-bold bg-blue-500/10 text-blue-600 border border-blue-500/20 min-w-[44px] disabled:opacity-30"
                 >
                   {teamLabels[0]}
                 </button>
@@ -203,7 +203,7 @@ export default function TeamSplitAnswer({
                   type="button"
                   onClick={() => assignMember(m.id, 1)}
                   disabled={team1Full}
-                  className="px-3 py-2 rounded-xl text-xs font-bold bg-red-400/10 text-red-500 border border-red-400/20 min-w-[44px] disabled:opacity-30"
+                  className="px-3 py-2.5 rounded-xl text-sm font-bold bg-red-400/10 text-red-500 border border-red-400/20 min-w-[44px] disabled:opacity-30"
                 >
                   {teamLabels[1]}
                 </button>
@@ -216,7 +216,7 @@ export default function TeamSplitAnswer({
       <button
         onClick={() => onAnswer({ assignments })}
         disabled={submitting || !allAssigned || !isEven}
-        className="h-11 rounded-2xl bg-accent text-white font-semibold hover:bg-accent-dark disabled:opacity-50"
+        className="h-12 rounded-2xl bg-accent text-white text-base font-semibold hover:bg-accent-dark disabled:opacity-50"
       >
         {submitting
           ? "Sende..."
