@@ -5,21 +5,24 @@ import { useState, useEffect } from "react";
 interface QuestionRatingProps {
   questionId: string;
   memberId: string;
+  initialRating?: number | null;
 }
 
 export default function QuestionRating({
   questionId,
   memberId,
+  initialRating,
 }: QuestionRatingProps) {
-  const [myRating, setMyRating] = useState<number | null>(null);
+  const [myRating, setMyRating] = useState<number | null>(initialRating ?? null);
 
   useEffect(() => {
+    if (initialRating !== undefined) return; // Skip fetch if provided
     fetch(
       `/api/ratings?question_id=${questionId}&member_id=${memberId}`
     )
       .then((r) => r.json())
       .then((d) => setMyRating(d.myRating));
-  }, [questionId, memberId]);
+  }, [questionId, memberId, initialRating]);
 
   async function rate(rating: number) {
     // Toggle off if same rating

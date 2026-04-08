@@ -26,11 +26,20 @@ interface Answer {
   members: { id: string; name: string };
 }
 
+interface Comment {
+  id: string;
+  text: string;
+  created_at: string;
+  members: { id: string; name: string };
+}
+
 interface ResultsData {
   revealed: boolean;
   answers?: Answer[];
   answered?: string[];
   total?: number;
+  comments?: Comment[];
+  myRating?: number | null;
   question: {
     id: string;
     text: string;
@@ -158,8 +167,8 @@ export default function QuestionCard({
           />
         )}
 
-        <QuestionRating questionId={question.id} memberId={memberId} />
-        <Comments questionId={question.id} memberId={memberId} />
+        <QuestionRating questionId={question.id} memberId={memberId} initialRating={results.myRating ?? null} />
+        <Comments questionId={question.id} memberId={memberId} initialComments={results.comments} />
       </div>
     );
   }

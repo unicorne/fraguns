@@ -9,22 +9,40 @@ export async function GET(
   const { searchParams } = new URL(request.url);
   const memberId = searchParams.get("member_id");
 
-  // Get question with answers
-  const { data: question, error } = await supabaseAdmin
-    .from("questions")
-    .select("*, answers(*, members:member_id(id, name))")
-    .eq("id", id)
-    .single();
+  // Get question with answers and member count in parallel
+  const [questionResult, commentsResult] = await Promise.all([
+    supabaseAdmin
+      .from("questions")
+      .select("*, answers(*, members:member_id(id, name)), groups:group_id(members(count))")
+      .eq("id", id)
+      .single(),
+    supabaseAdmin
+      .from("comments")
+      .select("*, members:member_id(id, name)")
+      .eq("question_id", id)
+      .order("created_at", { ascending: true }),
+  ]);
+
+  const { data: question, error } = questionResult;
 
   if (error || !question) {
     return NextResponse.json({ error: "Frage nicht gefunden" }, { status: 404 });
   }
 
-  // Get total member count for the group
-  const { count: memberCount } = await supabaseAdmin
-    .from("members")
-    .select("*", { count: "exact", head: true })
-    .eq("group_id", question.group_id);
+  const memberCount = (question.groups as unknown as { members: { count: number }[] })?.members?.[0]?.count ?? 0;
+  const comments = commentsResult.data || [];
+
+  // Get rating for this member
+  let myRating: number | null = null;
+  if (memberId) {
+    const { data: ratingData } = await supabaseAdmin
+      .from("question_ratings")
+      .select("rating")
+      .eq("question_id", id)
+      .eq("member_id", memberId)
+      .single();
+    myRating = ratingData?.rating ?? null;
+  }
 
   // Reveal results if this member has answered
   const memberHasAnswered = memberId
@@ -47,6 +65,8 @@ export async function GET(
         type: question.type,
         config: question.config,
       },
+      comments,
+      myRating,
     });
   }
 
@@ -98,5 +118,7 @@ export async function GET(
     },
     answers: answersData,
     total: memberCount,
+    comments,
+    myRating,
   });
 }

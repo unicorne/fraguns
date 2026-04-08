@@ -20,5 +20,13 @@ export async function GET(
     );
   }
 
-  return NextResponse.json(group);
+  // Fetch active question in the same request
+  const { data: activeQuestion } = await supabaseAdmin
+    .from("questions")
+    .select("*, answers(count)")
+    .eq("group_id", group.id)
+    .eq("is_active", true)
+    .single();
+
+  return NextResponse.json({ ...group, activeQuestion: activeQuestion || null });
 }

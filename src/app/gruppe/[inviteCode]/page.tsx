@@ -72,6 +72,8 @@ export default function GruppePage({
       const data = await res.json();
       setGroup(data);
 
+      setActiveQuestion(data.activeQuestion || null);
+
       const stored = getMemberForGroup(data.id);
       if (stored) {
         if (!stored.inviteCode) {
@@ -81,7 +83,6 @@ export default function GruppePage({
           memberId: stored.memberId,
           memberName: stored.memberName,
         });
-        fetchActiveQuestion(data.id);
       }
     } catch {
       router.push("/");
@@ -90,14 +91,6 @@ export default function GruppePage({
     }
   }
 
-  async function fetchActiveQuestion(groupId: string) {
-    const res = await fetch(`/api/questions?group_id=${groupId}`);
-    if (res.ok) {
-      const questions = await res.json();
-      const active = questions.find((q: Question) => q.is_active);
-      setActiveQuestion(active || null);
-    }
-  }
 
   async function handleJoin(e: React.FormEvent) {
     e.preventDefault();

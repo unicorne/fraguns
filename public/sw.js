@@ -1,4 +1,4 @@
-const CACHE_NAME = "fraguns-v3";
+const CACHE_NAME = "fraguns-v4";
 
 // Install: skip waiting (no precache — Next.js pages are dynamic)
 self.addEventListener("install", () => {
@@ -17,17 +17,34 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch: network-first for API, cache-first for static assets
+// Fetch strategy
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
   // Never cache API calls
   if (url.pathname.startsWith("/api/")) return;
 
+  // Cache-first for hashed static assets (immutable)
+  if (url.pathname.startsWith("/_next/static/")) {
+    event.respondWith(
+      caches.match(event.request).then((cached) => {
+        if (cached) return cached;
+        return fetch(event.request).then((response) => {
+          if (response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return response;
+        });
+      })
+    );
+    return;
+  }
+
+  // Network-first for everything else (pages, icons, etc.)
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        // Cache successful GET responses
         if (event.request.method === "GET" && response.status === 200) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));

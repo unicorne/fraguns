@@ -13,16 +13,17 @@ interface Comment {
 interface CommentsProps {
   questionId: string;
   memberId: string;
+  initialComments?: Comment[];
 }
 
-export default function Comments({ questionId, memberId }: CommentsProps) {
-  const [comments, setComments] = useState<Comment[]>([]);
+export default function Comments({ questionId, memberId, initialComments }: CommentsProps) {
+  const [comments, setComments] = useState<Comment[]>(initialComments || []);
   const [newComment, setNewComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetchComments();
+    if (!initialComments) fetchComments(); // Skip initial fetch if provided
     const interval = setInterval(fetchComments, 10000);
     return () => clearInterval(interval);
   }, [questionId]);

@@ -20,47 +20,58 @@ export async function GET(request: Request) {
     return NextResponse.json([]);
   }
 
-  // For each group, check if there's an active question the user hasn't answered
-  const result = await Promise.all(
-    memberships.map(async (m) => {
-      const group = m.groups as unknown as {
-        id: string;
-        name: string;
-        invite_code: string;
-      };
+  const groupIds = memberships.map((m) => {
+    const group = m.groups as unknown as { id: string };
+    return group.id;
+  });
+  const memberIds = memberships.map((m) => m.id);
 
-      // Get active question for this group
-      const { data: activeQ } = await supabaseAdmin
-        .from("questions")
-        .select("id")
-        .eq("group_id", group.id)
-        .eq("is_active", true)
-        .single();
+  // Batch: get all active questions for all groups at once
+  const { data: activeQuestions } = await supabaseAdmin
+    .from("questions")
+    .select("id, group_id")
+    .in("group_id", groupIds)
+    .eq("is_active", true);
 
-      let hasUnanswered = false;
+  // Batch: get all answers by this user's members for active questions
+  const activeQIds = (activeQuestions || []).map((q) => q.id);
+  let answeredQIds: string[] = [];
 
-      if (activeQ) {
-        // Check if this member has answered
-        const { data: answer } = await supabaseAdmin
-          .from("answers")
-          .select("id")
-          .eq("question_id", activeQ.id)
-          .eq("member_id", m.id)
-          .single();
+  if (activeQIds.length > 0) {
+    const { data: answers } = await supabaseAdmin
+      .from("answers")
+      .select("question_id")
+      .in("question_id", activeQIds)
+      .in("member_id", memberIds);
 
-        hasUnanswered = !answer;
-      }
+    answeredQIds = (answers || []).map((a) => a.question_id);
+  }
 
-      return {
-        groupId: group.id,
-        groupName: group.name,
-        inviteCode: group.invite_code,
-        memberId: m.id,
-        memberName: m.name,
-        hasUnanswered,
-      };
-    })
-  );
+  // Build lookup maps
+  const activeQByGroup = new Map<string, string>();
+  for (const q of activeQuestions || []) {
+    activeQByGroup.set(q.group_id, q.id);
+  }
+  const answeredSet = new Set(answeredQIds);
+
+  const result = memberships.map((m) => {
+    const group = m.groups as unknown as {
+      id: string;
+      name: string;
+      invite_code: string;
+    };
+    const activeQId = activeQByGroup.get(group.id);
+    const hasUnanswered = activeQId ? !answeredSet.has(activeQId) : false;
+
+    return {
+      groupId: group.id,
+      groupName: group.name,
+      inviteCode: group.invite_code,
+      memberId: m.id,
+      memberName: m.name,
+      hasUnanswered,
+    };
+  });
 
   return NextResponse.json(result);
 }
