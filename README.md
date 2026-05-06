@@ -102,9 +102,17 @@ Pool questions live in [`questions.json`](./questions.json). The format:
 { "type": "SKALA", "question": "...", "scale_max": 10 }
 { "type": "POLL", "question": "..." }
 { "type": "TEAM_SPLIT", "question": "...", "team_labels": ["A", "B"] }
+{ "type": "RANKING", "question": "..." }
 ```
 
 The cron reads from the `questions` table in Supabase, not the JSON file directly. To seed new pool questions into a group, insert rows with `created_by = NULL` and `scheduled_date = NULL`.
+
+#### Generating new questions with an LLM
+
+The [`create_question/`](./create_question) folder contains a ready-to-use prompt for generating new pool questions in the same tone and format:
+
+- [`create_question/prompt.md`](./create_question/prompt.md) — paste into any capable LLM (Claude, GPT, …), replace `{N}` with the count you want, and the model returns a JSON array you can append to `questions.json`.
+- [`create_question/examples.json`](./create_question/examples.json) — curated reference questions covering all 5 types; attach as extra context to keep the style on-brand.
 
 ### Adding a database change
 

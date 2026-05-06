@@ -1,0 +1,106 @@
+[
+  {
+    "type": "FREITEXT",
+    "question": "Wenn A ein Restaurant eröffnen würde — was für eins wäre es und wie würde es heißen?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist eine Meinung, die du hast, von der du weißt, dass sie in dieser Gruppe Stress auslösen würde?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn B ein Wikipedia-Artikel wäre — was stünde im Abschnitt 'Kontroversen'?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist die größte Red Flag an dir, die du selbst kennst, aber einfach nicht änderst?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn du A's Tinder-Profil schreiben müsstest, aber brutal ehrlich — was steht drin?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist A's toxic trait, den alle in der Gruppe kennen, aber keiner anspricht?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn B's Lebensentscheidungen bisher ein Yelp-Review wären — wie viele Sterne und was steht in der Bewertung?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Welche Phase deines Lebens würdest du komplett aus deiner Erinnerung löschen, wenn du könntest?"
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gut kann B ein Geheimnis für sich behalten?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie sehr lebt B unter seinem/ihrem Potenzial?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie cringe ist A's Social-Media-Auftritt?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie petty kann A werden, wenn er/sie sich ungerecht behandelt fühlt?",
+    "scale_max": 10
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hat die meisten Red Flags, sieht aber von außen am normalsten aus?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch würde am ehesten ein komplettes Doppelleben führen können, ohne dass es auffliegt?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wessen Eltern wären am meisten enttäuscht, wenn sie wüssten, was ihr Kind wirklich so treibt?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch wäre der bessere Cult Leader?"
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer ist secretly deep und wer hat die emotionale Tiefe einer Pfütze?",
+    "team_labels": ["Stille Wasser", "Pfützen-Tiefe"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer würde den anderen für 100.000€ verraten und wer bleibt loyal?",
+    "team_labels": ["Judas", "Ride or Die"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer altert wie Wein und wer altert wie Milch?",
+    "team_labels": ["Altert wie Wein", "Altert wie Milch"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer hat echte Prinzipien und wer biegt sich die Moral zurecht, wie es gerade passt?",
+    "team_labels": ["Echte Prinzipien", "Moralischer Gymnast"]
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am schlechtesten lügen kann — von Glasgesicht bis Profi-Bluffer."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe: Wer hat den besten Kleidungsstil — von Fashion Icon bis Jogginghosen-Leiche?"
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wen ihr als Erstes anruft, wenn ihr eine Leiche im Keller habt."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am ehesten mal viral geht — von Internet-Fame bis digitaler Geist."
+  }
+]
