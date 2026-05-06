@@ -15,6 +15,43 @@ Live at [fraguns.vercel.app](https://fraguns.vercel.app).
 - **PWA**: installable on iOS/Android with [`public/manifest.json`](./public/manifest.json) and [`public/sw.js`](./public/sw.js).
 - No real auth — identity is a name + a `userId` in `localStorage`. Server access is gated by the Supabase service role key inside API routes.
 
+## Installation (PWA)
+
+FragUns is a Progressive Web App — there is no App Store / Play Store listing. Install it directly from the browser. **Important on iOS**: push notifications only work if the app is installed to the home screen. Just bookmarking the URL is not enough.
+
+### iOS (iPhone / iPad)
+
+Use **Safari** — Chrome and Firefox on iOS don't support PWA install.
+
+1. Open [fraguns.vercel.app](https://fraguns.vercel.app) in Safari.
+2. Tap the **Share** button (square with the up-arrow) at the bottom of the screen.
+3. Scroll down and tap **Zum Home-Bildschirm** ("Add to Home Screen").
+4. Tap **Hinzufügen** ("Add") in the top right.
+5. Open FragUns from the new home-screen icon. The first time the app opens, allow notifications when prompted.
+
+If you don't get the notification prompt automatically, go to **Profil → Push-Benachrichtigungen** in the app.
+
+### Android
+
+Works in **Chrome**, **Edge**, **Samsung Internet**, **Firefox**, and most Chromium-based browsers.
+
+1. Open [fraguns.vercel.app](https://fraguns.vercel.app).
+2. Either:
+   - Tap the **"App installieren"** banner Chrome shows automatically, **or**
+   - Open the browser menu (⋮ in the top right) and tap **App installieren** / **Zum Startbildschirm hinzufügen**.
+3. Confirm the install dialog.
+4. Open FragUns from your home screen / app drawer and allow notifications when prompted.
+
+### Desktop (optional)
+
+In Chrome/Edge on Mac/Windows you can also install it from the URL bar — look for the install icon (a small monitor with a down-arrow) on the right side of the address bar. Useful for testing notifications during development.
+
+### Troubleshooting
+
+- **No notifications on iOS**: the app must be installed to the home screen *and* opened from there at least once. Check **Settings → Notifications → FragUns** is enabled.
+- **No notifications on Android**: open the app, go to **Profil → Push-Benachrichtigungen** and re-enable. If nothing happens, check the system-level notification permission for the browser/PWA.
+- **Install option missing**: the device probably already has it installed, or the browser doesn't support PWAs (e.g. iOS Chrome). Open Safari instead.
+
 ## Stack
 
 - [Next.js 16](https://nextjs.org) App Router (with Turbopack), React 19, TypeScript, Tailwind 4
