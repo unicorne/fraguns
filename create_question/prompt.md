@@ -38,9 +38,24 @@ Eine Antwort ist ein JSON-Objekt mit einem `type`-Feld. Pflicht ist immer `quest
 6. **`team_labels`** sind kurz (1–4 Wörter), provokant, klar gegensätzlich. Beispiele: `["Wolf", "Schaf"]`, `["Boss", "Snitch"]`, `["Daddy Issues", "Mommy Issues"]`.
 7. **Bei `SKALA`** soll die Skalenfrage eindeutig negativ *oder* positiv interpretierbar sein (sonst wird die Diskussion fad). Beispiel gut: *„wie cringe ist A's Social-Media-Auftritt"*. Beispiel schlecht: *„wie ist A so generell"*.
 
-## Beispiele
+## Beispiele für den Stil
 
 Lies die Beispieldatei [`examples.json`](./examples.json) — sie deckt alle 5 Typen ab und zeigt den Ton. Imitiere den Stil, **kopiere keine Frage 1:1**.
+
+## Keine Duplikate — bestehender Pool
+
+Bevor du neue Fragen schreibst, **musst du alle bereits existierenden Fragen lesen**, um Wiederholungen zu vermeiden. Bestehende Fragen liegen in:
+
+- [`../questions.json`](../questions.json) — der historische Seed-Pool
+- [`../src/lib/default-questions.ts`](../src/lib/default-questions.ts) — der Pool, mit dem neue Gruppen seeded werden
+- [`./questions/`](./questions/) — alle bisher generierten Batches (jede `*.json`-Datei in diesem Ordner)
+
+Eine neue Frage gilt als Duplikat, wenn sie:
+- denselben Wortlaut hat **oder**
+- dieselbe Idee/Pointe hat (auch leicht umformuliert) **oder**
+- bei `SKALA`/`TEAM_SPLIT` dieselbe Achse misst (z. B. zwei Fragen zu „Loyalität"). Variiere stattdessen Frame oder Aspekt.
+
+Wenn du unsicher bist, ob etwas zu nah dran ist — lass es weg und schreib was anderes.
 
 ## Output-Format
 
@@ -56,6 +71,8 @@ Antworte **ausschließlich** mit einem gültigen JSON-Array. Kein Markdown-Codef
 ]
 ```
 
+Speichere das Ergebnis als neue Datei unter `create_question/questions/<heutiges-datum>.json` (z. B. `2026-05-06.json`). So baut sich der Pool über mehrere Läufe hinweg auf, und der Upload-Script ([`upload.mjs`](./upload.mjs)) kann später alle Batches in die DB schieben.
+
 ## Aufgabe
 
 Generiere **{N}** neue Fragen für den FragUns-Pool. Verteile sie ungefähr so:
@@ -66,4 +83,4 @@ Generiere **{N}** neue Fragen für den FragUns-Pool. Verteile sie ungefähr so:
 - 20 % `TEAM_SPLIT`
 - 10 % `RANKING`
 
-Beachte alle Stil-Regeln oben. Liefere nur das JSON-Array, sonst nichts.
+Beachte alle Stil-Regeln oben, prüfe gegen den bestehenden Pool auf Duplikate, und liefere nur das JSON-Array, sonst nichts.

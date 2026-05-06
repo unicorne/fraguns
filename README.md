@@ -109,10 +109,23 @@ The cron reads from the `questions` table in Supabase, not the JSON file directl
 
 #### Generating new questions with an LLM
 
-The [`create_question/`](./create_question) folder contains a ready-to-use prompt for generating new pool questions in the same tone and format:
+The [`create_question/`](./create_question) folder contains a full generate-then-upload workflow:
 
-- [`create_question/prompt.md`](./create_question/prompt.md) — paste into any capable LLM (Claude, GPT, …), replace `{N}` with the count you want, and the model returns a JSON array you can append to `questions.json`.
-- [`create_question/examples.json`](./create_question/examples.json) — curated reference questions covering all 5 types; attach as extra context to keep the style on-brand.
+- [`create_question/prompt.md`](./create_question/prompt.md) — the LLM prompt. Paste it into any capable model, replace `{N}` with how many questions you want. The prompt instructs the model to read all existing questions (`questions.json`, `default-questions.ts`, and every previous batch in `create_question/questions/`) so it doesn't generate duplicates.
+- [`create_question/examples.json`](./create_question/examples.json) — curated reference questions covering all 5 types; helps anchor the style.
+- [`create_question/questions/`](./create_question/questions) — drop the model's output here as `<date>.json` (e.g. `2026-05-06.json`). One file per generation run.
+- [`create_question/upload.mjs`](./create_question/upload.mjs) — uploads every batch file to Supabase. Maps the JSON pool format → DB rows (`FREITEXT` → `text`, `SKALA` → `scale`, etc.) and inserts into **every existing group's** `questions` table with `created_by = NULL` and `scheduled_date = NULL`, so the cron picks them up. **Idempotent** — skips any question whose text already exists in that group, so re-runs are safe.
+
+Workflow:
+
+```bash
+# 1. Run the prompt in your LLM of choice → save the JSON output as
+#    create_question/questions/2026-05-06.json
+# 2. Push to the DB:
+node --env-file=.env.local create_question/upload.mjs
+```
+
+Note: `upload.mjs` only adds questions to **existing** groups. If you want newly-created groups to inherit them too, also append the matching entries to [`src/lib/default-questions.ts`](./src/lib/default-questions.ts) (which is what's seeded when a group is created).
 
 ### Adding a database change
 
