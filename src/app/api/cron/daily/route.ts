@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase-server";
+import { resolveQuestionText } from "@/lib/resolve-question-text";
 
 interface UnscheduledQuestion {
   id: string;
@@ -87,6 +88,20 @@ export async function GET(request: Request) {
   );
 
   for (const group of groups) {
+    // Already rotated today (e.g. duplicate cron trigger) — skip entirely.
+    const { data: alreadyToday } = await supabaseAdmin
+      .from("questions")
+      .select("id")
+      .eq("group_id", group.id)
+      .eq("scheduled_date", today)
+      .limit(1)
+      .maybeSingle();
+
+    if (alreadyToday) {
+      log.push(`group ${group.name}: already has today's question, skipping`);
+      continue;
+    }
+
     // Deactivate current active question
     await supabaseAdmin
       .from("questions")
@@ -144,13 +159,14 @@ export async function GET(request: Request) {
     );
 
     // Send push notifications
-    const { data: members } = await supabaseAdmin
+    const { data: allMembers } = await supabaseAdmin
       .from("members")
-      .select("push_subscription")
-      .eq("group_id", group.id)
-      .not("push_subscription", "is", null);
+      .select("id, name, push_subscription")
+      .eq("group_id", group.id);
 
-    if (!members || members.length === 0) {
+    const members = (allMembers || []).filter((m) => m.push_subscription);
+
+    if (members.length === 0) {
       log.push(`  push: no subscriptions`);
       continue;
     }
@@ -159,7 +175,7 @@ export async function GET(request: Request) {
 
     const payload = JSON.stringify({
       title: `${group.name}`,
-      body: nextQuestion.text,
+      body: resolveQuestionText(nextQuestion.text, nextQuestion.id, allMembers || []),
       url: `/gruppe/${group.invite_code}`,
     });
 
