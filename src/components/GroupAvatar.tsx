@@ -4,6 +4,8 @@ const EMOJIS = [
   "🦄", "🐙", "🦖", "🐸", "🦊", "🐵", "🦁", "🐯",
   "🐨", "🐼", "🦉", "🦩", "🐳", "🦋", "🐺", "🦔",
   "🐹", "🦒", "🐢", "🦫", "🐧", "🦥", "🐝", "🦀",
+  "🦦", "🦕", "🦭", "🐿️", "🦡", "🐰", "🦜", "🐷",
+  "🐮", "🦧", "🦌", "🐴", "🦢", "🦚",
 ];
 
 const sizes = {
@@ -19,13 +21,14 @@ interface GroupAvatarProps {
 }
 
 export default function GroupAvatar({ groupId, size = "md" }: GroupAvatarProps) {
-  const seed = hashString(groupId);
+  const emojiIdx = hashString(groupId) % EMOJIS.length;
+  const colorIdx = hashString(groupId + ":color") % COLORS.length;
   return (
     <div
       className={`${sizes[size]} rounded-full flex items-center justify-center shrink-0`}
-      style={{ backgroundColor: COLORS[seed % COLORS.length] + "33" }}
+      style={{ backgroundColor: COLORS[colorIdx] + "33" }}
     >
-      {EMOJIS[seed % EMOJIS.length]}
+      {EMOJIS[emojiIdx]}
     </div>
   );
 }

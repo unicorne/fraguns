@@ -20,7 +20,11 @@ export async function POST(request: Request) {
 
     const { error: uploadError } = await supabaseAdmin.storage
       .from("avatars")
-      .upload(path, file, { upsert: true, contentType: file.type });
+      .upload(path, file, {
+        upsert: true,
+        contentType: file.type,
+        cacheControl: "31536000",
+      });
 
     if (uploadError) {
       return NextResponse.json({ error: uploadError.message }, { status: 500 });

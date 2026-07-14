@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const COLORS = [
   "#ef4444", "#f97316", "#f59e0b", "#84cc16",
   "#22c55e", "#06b6d4", "#3b82f6", "#8b5cf6",
@@ -43,12 +45,16 @@ const sizes = {
   xl: "w-20 h-20 text-3xl",
 };
 
+const pixelSizes = { sm: 32, md: 40, lg: 48, xl: 80 };
+
 export default function Avatar({ name, size = "md", avatarData }: AvatarProps) {
   if (avatarData?.avatar_type === "image" && avatarData.avatar_url) {
     return (
-      <img
+      <Image
         src={avatarData.avatar_url}
         alt={name}
+        width={pixelSizes[size]}
+        height={pixelSizes[size]}
         className={`${sizes[size]} rounded-full object-cover shrink-0`}
       />
     );
