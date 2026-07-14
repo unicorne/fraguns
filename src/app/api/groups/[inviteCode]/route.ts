@@ -9,7 +9,7 @@ export async function GET(
 
   const { data: group, error } = await supabaseAdmin
     .from("groups")
-    .select("*, members(*)")
+    .select("*, members(*, users(avatar_type, avatar_url))")
     .eq("invite_code", inviteCode)
     .single();
 

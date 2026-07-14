@@ -5,13 +5,15 @@ import { useRouter } from "next/navigation";
 import { getMemberForGroup, storeMember, getStoredUser } from "@/lib/storage";
 import QuestionCard from "@/components/QuestionCard";
 // Push notifications are now handled globally via /einstellungen
-import { AvatarGroup } from "@/components/Avatar";
+import Avatar, { AvatarGroup, AvatarData } from "@/components/Avatar";
 import Countdown from "@/components/Countdown";
 import { FullPageSpinner } from "@/components/LoadingSpinner";
+import { resolveQuestionText } from "@/lib/resolve-question-text";
 
 interface Member {
   id: string;
   name: string;
+  users: AvatarData | null;
 }
 
 interface Question {
@@ -48,6 +50,7 @@ export default function GruppePage({
   const [activeQuestion, setActiveQuestion] = useState<Question | null>(null);
   const [loading, setLoading] = useState(true);
   const [showInvite, setShowInvite] = useState(false);
+  const [showMembers, setShowMembers] = useState(false);
 
   useEffect(() => {
     fetchGroup();
@@ -167,6 +170,11 @@ export default function GruppePage({
 
   if (!group) return null;
 
+  const avatarMap: Record<string, AvatarData> = {};
+  for (const m of group.members) {
+    if (m.users) avatarMap[m.name] = m.users;
+  }
+
   // Join screen
   if (!currentMember) {
     return (
@@ -182,6 +190,7 @@ export default function GruppePage({
                 names={group.members.map((m) => m.name)}
                 max={6}
                 size="md"
+                avatarMap={avatarMap}
               />
             </div>
           )}
@@ -261,18 +270,22 @@ export default function GruppePage({
           </button>
         </div>
 
-        <div className="flex justify-center mb-3">
+        <button
+          className="flex justify-center mb-3 w-full"
+          onClick={() => setShowMembers(!showMembers)}
+        >
           <AvatarGroup
             names={group.members.map((m) => m.name)}
             max={5}
             size="sm"
+            avatarMap={avatarMap}
           />
-        </div>
+        </button>
 
         {activeQuestion ? (
           <>
             <h2 className="text-xl font-bold text-white leading-snug px-2">
-              {activeQuestion.text}
+              {resolveQuestionText(activeQuestion.text, activeQuestion.id, group.members)}
             </h2>
             <div className="mt-3">
               <Countdown />
@@ -289,6 +302,32 @@ export default function GruppePage({
           </>
         )}
       </div>
+
+      {/* Members overview */}
+      {showMembers && (
+        <div className="mx-4 -mt-4 mb-4 p-4 rounded-2xl bg-card border border-card-border shadow-md z-20 relative">
+          <p className="text-xs text-muted mb-3">Mitglieder</p>
+          <div className="flex flex-col gap-1">
+            {group.members.map((m) => {
+              const isMe = m.id === currentMember.memberId;
+              return (
+                <button
+                  key={m.id}
+                  onClick={() => isMe && router.push("/profil")}
+                  disabled={!isMe}
+                  className="flex items-center gap-3 px-2 py-2 rounded-xl hover:bg-background disabled:hover:bg-transparent text-left"
+                >
+                  <Avatar name={m.name} size="sm" avatarData={avatarMap[m.name]} />
+                  <span className="text-sm text-foreground font-medium">
+                    {m.name}
+                    {isMe && <span className="text-muted font-normal"> (Du)</span>}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Invite bar */}
       {showInvite && (
