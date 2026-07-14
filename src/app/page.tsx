@@ -10,7 +10,7 @@ import {
   MemberInfo,
   UserInfo,
 } from "@/lib/storage";
-import { AvatarGroup } from "@/components/Avatar";
+import GroupAvatar from "@/components/GroupAvatar";
 import InitialPushPrompt from "@/components/InitialPushPrompt";
 import { FullPageSpinner } from "@/components/LoadingSpinner";
 
@@ -256,7 +256,7 @@ export default function Home() {
                 className="w-full bg-card rounded-2xl border border-card-border p-4 text-left shadow-sm active:scale-[0.98] relative"
               >
                 <div className="flex items-center gap-3">
-                  <AvatarGroup names={[g.memberName]} size="md" />
+                  <GroupAvatar groupId={g.groupId} size="md" />
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-foreground truncate">
                       {g.groupName}

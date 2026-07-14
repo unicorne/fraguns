@@ -1,15 +1,19 @@
-const COLORS = [
+export const COLORS = [
   "#ef4444", "#f97316", "#f59e0b", "#84cc16",
   "#22c55e", "#06b6d4", "#3b82f6", "#8b5cf6",
   "#ec4899", "#f43f5e", "#14b8a6", "#6366f1",
 ];
 
-function getColor(name: string): string {
+export function hashString(input: string): number {
   let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  for (let i = 0; i < input.length; i++) {
+    hash = input.charCodeAt(i) + ((hash << 5) - hash);
   }
-  return COLORS[Math.abs(hash) % COLORS.length];
+  return Math.abs(hash);
+}
+
+function getColor(name: string): string {
+  return COLORS[hashString(name) % COLORS.length];
 }
 
 function getInitials(name: string): string {
