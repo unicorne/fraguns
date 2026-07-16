@@ -1,0 +1,178 @@
+[
+  {
+    "type": "FREITEXT",
+    "question": "Wenn A eine Signature-Move beim Feiern hätte — was wäre es?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist die dümmste Ausrede, die A je benutzt hat, um sich vor Verantwortung zu drücken?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn B eine Reality-Show bekäme — wie würde sie heißen und worum ginge es?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist ein Kompliment, das eigentlich eine Beleidigung ist, das du A schon mal gemacht hast?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn du für einen Tag B's innere Stimme wärst — was würdest du ihm/ihr als Erstes sagen?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist die peinlichste Nachricht, die noch in deinem Handy liegt und du hoffst, dass sie nie jemand sieht?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn A's Ex ein Interview über ihn/sie geben würde — was wäre die erste Zeile?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist ein Traum, den du hattest, den du nie jemandem erzählt hast, weil er zu creepy war?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn B in einem Horrorfilm die erste Person wäre, die stirbt — was macht er/sie kurz davor falsch?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist die unlogischste Angst, die du hast?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn du A's Autobiografie in einem Satz zusammenfassen müsstest — wie würde er lauten?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was würdest du sofort ändern, wenn du für einen Tag Diktator dieser Gruppe wärst?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn B heimlich einen zweiten Job hätte, den niemand kennt — was wäre es?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist das Letzte, worüber du heimlich geweint hast?"
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie sehr würde A in einer Reality-Dating-Show für Drama sorgen?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie überzeugend könnte B in einem Pyramidensystem rekrutieren?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie sehr würde A unter Druck in einer Prüfungssituation zusammenbrechen?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie viel Drama bringt B ungewollt in jede Gruppenchat-Diskussion?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie sehr overthinked A jede Nachricht, bevor er/sie sie abschickt?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie überzeugend könnte B als Trauzeuge/-in spontan eine Rede improvisieren?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie sehr würde A in einer WG-Küche für Chaos sorgen?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie schnell würde B unter Gruppenzwang seine/ihre Prinzipien über Bord werfen?",
+    "scale_max": 10
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch könnte am ehesten eine ganze Woche ohne Handy überleben?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hätte am ehesten schon mal eine Verschwörungstheorie geglaubt, die offensichtlich falsch war?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wessen Liebesleben würde die spannendste Netflix-Doku abgeben?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch würde im Gefängnis am schnellsten Freunde finden?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hat am ehesten einen geheimen Finsta, den niemand kennt?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch würde als Erstes bei einer Bergwanderung aufgeben?"
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer plant jeden Urlaub bis ins Detail und wer bucht erst am Flughafen.",
+    "team_labels": ["Excel-Tabelle", "Chaos-Trip"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer würde in einer Krise die Ruhe bewahren und wer dreht sofort durch.",
+    "team_labels": ["Eisblock", "Panikmodus"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer gibt sein letztes Geld für Erlebnisse aus und wer für Dinge.",
+    "team_labels": ["Erlebnis-Junkie", "Dinge-Sammler"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer würde in einem Streit zuerst nachgeben und wer kämpft bis zum bitteren Ende.",
+    "team_labels": ["Weiße Fahne", "Sturkopf"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer liest die Nutzungsbedingungen wirklich und wer klickt einfach 'Akzeptieren'.",
+    "team_labels": ["Kleingedrucktes", "Blind-Klicker"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer würde im Notfall zuerst die Polizei rufen und wer versucht es erstmal selbst zu regeln.",
+    "team_labels": ["Regelkonform", "Selbstjustiz"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer trainiert für die Bikini-Saison ab Januar und wer erst eine Woche vorher.",
+    "team_labels": ["Disziplin", "Last-Minute-Panik"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer würde als Elternteil zu streng sein und wer viel zu locker.",
+    "team_labels": ["Drill Sergeant", "Laissez-faire"]
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am ehesten einen Filmabend komplett verschläft."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe: Wer würde am längsten in einem Escape Room feststecken — von Rätsel-Genie bis hoffnungslosem Fall?"
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am meisten Zeit vorm Spiegel verbringt."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe: Wer gibt am meisten Geld für Essen aus — von Sparfuchs bis Foodie ohne Limit?"
+  }
+]

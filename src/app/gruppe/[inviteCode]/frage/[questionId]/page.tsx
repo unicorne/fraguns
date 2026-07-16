@@ -13,6 +13,7 @@ import TimelineResults from "@/components/results/TimelineResults";
 import TwoTruthsOneLieResults from "@/components/results/TwoTruthsOneLieResults";
 import TeamSplitResults from "@/components/results/TeamSplitResults";
 import RankingResults from "@/components/results/RankingResults";
+import { resolveQuestionText } from "@/lib/resolve-question-text";
 
 interface ResultsData {
   revealed: boolean;
@@ -92,7 +93,7 @@ export default function FrageErgebnisse({
           &larr; Zurück
         </button>
         <h2 className="text-xl font-bold text-white leading-snug">
-          {results.question.text}
+          {resolveQuestionText(results.question.text, results.question.id, groupMembers)}
         </h2>
         <p className="text-white/60 text-xs mt-2">
           {results.question.type === "poll"

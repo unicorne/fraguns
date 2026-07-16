@@ -1,0 +1,176 @@
+[
+  {
+    "type": "POLL",
+    "question": "Wer von euch schafft es am ehesten, heute Abend im Club jemanden aufzureißen?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch lügt am öftesten?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch wird am ältesten?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hat am wenigsten Geld auf dem Konto?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch heiratet als Erstes?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch kocht am besten?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hatte am ehesten schon mal einen One-Night-Stand, den er/sie bereut?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch kann am besten mit Geld umgehen?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch braucht morgens am längsten im Bad?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch verbringt am meisten Zeit auf dem Klo?"
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am wenigsten schläft."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am meisten Sport macht."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe: Wer kann am besten flirten — von Naturtalent bis Totalausfall?"
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer mit 40 am meisten verdienen wird."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am häufigsten verkatert ist."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer die meisten Dates im Jahr hat."
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie attraktiv ist A — ganz objektiv?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie fit ist B gerade wirklich?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gesund ernährt sich A?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie verlässlich ist A, wenn man ihn/sie wirklich braucht?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie schnell ist B beleidigt?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gut ist B im Bett — rein von der Vermutung her?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gut kann A zuhören?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie wahrscheinlich ist B in 5 Jahren noch single?",
+    "scale_max": 10
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer geht wirklich ins Gym und wer redet nur drüber.",
+    "team_labels": ["Gym-Rat", "Nur Gerede"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer ist Frühaufsteher und wer kriegt vor 10 Uhr nichts gebacken.",
+    "team_labels": ["6-Uhr-Club", "Snooze-Opfer"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer kann mit Geld umgehen und wer ist am 15. schon pleite.",
+    "team_labels": ["Sparbuch", "Am 15. pleite"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer geht auf Leute zu und wer wartet, bis er/sie angesprochen wird.",
+    "team_labels": ["Erster Schritt", "Wartet ab"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer kann gut alleine sein und wer braucht immer Leute um sich.",
+    "team_labels": ["Lone Wolf", "Rudeltier"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer verliebt sich sofort und wer lässt niemanden ran.",
+    "team_labels": ["Verliebt in 2 Tagen", "Fort Knox"]
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist das Ungesündeste an deinem aktuellen Lifestyle?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was würdest du an deinem Körper ändern, wenn es einfach ginge?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wann hast du das letzte Mal jemanden aus dieser Gruppe angelogen — und worum ging's?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was war dein schlimmstes Date ever?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Worauf bist du bei anderen am meisten neidisch?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wie sieht A's Leben in 10 Jahren aus — ehrliche Prognose?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Beschreib deinen Typ — ehrlich, nicht die PR-Version."
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wobei bist du zuletzt so richtig gescheitert?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Welche Angewohnheit von B würdest du sofort übernehmen?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wie viel Geld brauchst du im Monat, um glücklich zu sein — ehrliche Zahl?"
+  }
+]

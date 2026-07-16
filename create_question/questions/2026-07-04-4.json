@@ -1,0 +1,437 @@
+[
+  {
+    "type": "POLL",
+    "question": "Wer von euch geht als Letztes von einer Party nach Hause?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch ruft seine Eltern am häufigsten an?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch würde am ehesten fremdgehen?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch fährt am schlechtesten Auto?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch gibt am meisten Geld für Klamotten aus?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch könnte am längsten ohne Sex auskommen?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hat den schlechtesten Musikgeschmack?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch zieht als Erstes aufs Land?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hat als Erstes graue Haare?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch antwortet am langsamsten im Gruppenchat?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch gewinnt in einer Schlägerei?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch trinkt unter der Woche am meisten?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch kündigt am ehesten spontan seinen Job?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hat am längsten kein Buch mehr gelesen?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch schuldet am ehesten noch irgendwem Geld?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch weint am schnellsten?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hat die meisten ungelesenen Nachrichten auf dem Handy?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch geht am seltensten zum Zahnarzt?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch isst am meisten Fast Food?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hat mit 40 den kaputtesten Rücken?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch würde eine Woche vegan am ehesten durchziehen?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch hat die chaotischste Wohnung?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch wäre der/die beste Trauzeuge/Trauzeugin?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch merkt sich keine Geburtstage?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch macht die meisten Selfies?"
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer vermutlich am besten küssen kann."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am meisten isst."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer zuerst eine Glatze bekommt."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer heute ohne Aufwärmen die schnellsten 100 Meter läuft."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer die meisten Ex-Partner:innen hat."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer in einer Beziehung am anstrengendsten ist."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am härtesten arbeitet."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am ehesten mit 30 noch bei den Eltern wohnt."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am besten singen kann."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am meisten lästert."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer nach einer Trennung am schnellsten eine neue Beziehung anfängt."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer mit Kater am besten funktioniert."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer als Kind am frechsten war."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am meisten Trinkgeld gibt."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer den tiefsten Schlaf hat."
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie stur ist A?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie eifersüchtig ist B in Beziehungen?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie lustig ist A wirklich?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gut kann B tanzen?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie romantisch ist A?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gut würde B beim Gehaltsgespräch verhandeln?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie abhängig ist A von Koffein?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie sportlich war B in der Schule?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie wahrscheinlich zieht A nochmal ins Ausland?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gut geht B mit Kritik um?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie anstrengend wird A, wenn er/sie betrunken ist?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gestresst ist B eigentlich die meiste Zeit?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gerne mag A seinen/ihren Job wirklich?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie sehr hängt B noch an einem/einer Ex?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie mutig ist A?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gut kann B Small Talk?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie egoistisch ist A?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie viel Selbstdisziplin hat B?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie zufrieden ist A gerade mit seinem/ihrem Liebesleben?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie schlau ist B wirklich — ehrlich?",
+    "scale_max": 10
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer duscht morgens und wer abends.",
+    "team_labels": ["Morgens", "Abends"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer zahlt nur noch mit Handy und wer hat immer Bargeld dabei.",
+    "team_labels": ["Apple Pay", "Portemonnaie"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer ist Hunde-Mensch und wer Katzen-Mensch.",
+    "team_labels": ["Team Hund", "Team Katze"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer macht Urlaub am Strand und wer in den Bergen.",
+    "team_labels": ["Strand", "Berge"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer funktioniert ohne Frühstück und wer wird ohne Essen unausstehlich.",
+    "team_labels": ["Kein Frühstück nötig", "Hangry-Monster"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer will später Kinder und wer eher nicht.",
+    "team_labels": ["Team Kinder", "Team Kinderfrei"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer geht am Wochenende feiern und wer bleibt lieber auf der Couch.",
+    "team_labels": ["Rave", "Couch"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer ist Team Bier und wer Team Cocktails.",
+    "team_labels": ["Bier", "Cocktails"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer kocht selbst und wer bestellt.",
+    "team_labels": ["Selbstkocher", "Lieferando-Stammkunde"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer sagt Treffen am selben Tag ab und wer taucht immer auf.",
+    "team_labels": ["Absage-Profi", "Immer da"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer ist eher Therapeut:in der Gruppe und wer Patient:in.",
+    "team_labels": ["Therapeut:in", "Patient:in"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer sagt, was er/sie denkt, und wer schluckt alles runter.",
+    "team_labels": ["Direkt raus", "Schluckt's runter"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer isst Fleisch ohne schlechtes Gewissen und wer ist (fast) vegetarisch.",
+    "team_labels": ["Steak", "Tofu"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer war in der Schule beliebt und wer eher unsichtbar.",
+    "team_labels": ["Beliebt", "Unsichtbar"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer glaubt an Horoskope und wer an gar nichts.",
+    "team_labels": ["Sternzeichen-Checker", "Skeptiker"]
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was war der beste Kuss deines Lebens?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was steht bei dir seit Monaten auf der To-do-Liste und passiert einfach nicht?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was war dein peinlichster Moment im Club?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wofür gibst du monatlich am meisten Geld aus — ehrlich?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was war der schlimmste Job, den du je hattest?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was raubt dir gerade am meisten Schlaf?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wann hast du dich das letzte Mal so richtig lebendig gefühlt?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was war das Netteste, das A je für dich getan hat?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "In welcher Situation hast du B am meisten bewundert?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist der größte Unterschied zwischen dir heute und dir vor 5 Jahren?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Welches Kompliment bekommst du am häufigsten — und stimmt es?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was war deine schlechteste Frisur ever?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was isst du, wenn niemand zuguckt?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist das Erwachsenste, das du diese Woche gemacht hast?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was war der betrunkenste Moment deines Lebens?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Welche Regel deiner Eltern hast du am häufigsten gebrochen?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was würdest du an dieser Gruppe ändern, wenn du eine Sache ändern müsstest?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist dein Guilty-Pleasure-Song?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Worüber hast du deinen letzten richtigen Streit geführt?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was kannst du besser als alle anderen in dieser Gruppe?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was kann A besser, als er/sie selbst denkt?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Bei welchem Thema würdest du B nie um Rat fragen?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was war dein Highlight der letzten 12 Monate?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was wolltest du als Kind unbedingt werden — und woran ist es gescheitert?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wann warst du das letzte Mal beim Arzt, obwohl du schon viel früher gemusst hättest?"
+  }
+]

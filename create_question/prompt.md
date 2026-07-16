@@ -42,6 +42,10 @@ Eine Antwort ist ein JSON-Objekt mit einem `type`-Feld. Pflicht ist immer `quest
 
 Lies die Beispieldatei [`examples.json`](./examples.json) — sie deckt alle 5 Typen ab und zeigt den Ton. Imitiere den Stil, **kopiere keine Frage 1:1**.
 
+## Feedback aus dem Review
+
+Falls [`./labels.json`](./labels.json) existiert, lies sie: Sie enthält pro Frage ein Label `good` oder `bad` (gesammelt über `node create_question/review.mjs`). Analysiere die Muster — welche Themen, Frametypen und Tonlagen als `good` bzw. `bad` markiert wurden — und schreibe neue Fragen, die den `good`-Mustern folgen und die `bad`-Muster vermeiden.
+
 ## Keine Duplikate — bestehender Pool
 
 Bevor du neue Fragen schreibst, **musst du alle bereits existierenden Fragen lesen**, um Wiederholungen zu vermeiden. Bestehende Fragen liegen in:

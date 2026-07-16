@@ -1,0 +1,597 @@
+{
+  "Teilt euch auf: Wer ist secretly deep und wer hat die emotionale Tiefe einer Pfütze?": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Wer von euch hat den besseren Körper?": {
+    "label": "good",
+    "type": "POLL",
+    "source": "questions.json (seed)"
+  },
+  "Was ist eine Meinung, die du hast, von der du weißt, dass sie in dieser Gruppe Stress auslösen würde?": {
+    "label": "good",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Auf einer Skala von 1 bis 10, wie gut wäre A als Elternteil?": {
+    "label": "good",
+    "type": "SKALA",
+    "source": "questions.json (seed)"
+  },
+  "Teilt euch auf: Wer hat Rizz und wer hat Anti-Rizz?": {
+    "label": "good",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Beschreib den Moment, in dem du dich in deinem Leben am meisten geschämt hast — in einem Satz.": {
+    "label": "good",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Was ist A's beste Eigenschaft — und welche Eigenschaft steht ihr am meisten im Weg?": {
+    "label": "good",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Teilt euch auf: Wer hat die Streetsmarts und wer hat die Booksmarts?": {
+    "label": "good",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Auf einer Skala von 1 bis 10, wie sehr lebt B unter seinem/ihrem Potenzial?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "questions.json (seed)"
+  },
+  "Teilt euch auf: Wer würde den anderen für 100.000€ verraten und wer bleibt loyal?": {
+    "label": "good",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Welche Phase deines Lebens würdest du komplett aus deiner Erinnerung löschen, wenn du könntest?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Teilt euch auf: Wer hat echtes Selbstbewusstsein und wer faked es nur extrem gut?": {
+    "label": "good",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Was ist das Krasseste, das du mal getan hast, von dem niemand in dieser Gruppe weiß?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Auf einer Skala von 1 bis 10, wie emotional abhängig ist B von Bestätigung durch andere?": {
+    "label": "good",
+    "type": "SKALA",
+    "source": "questions.json (seed)"
+  },
+  "Wenn du eine Version von dir aus einem Paralleluniversum treffen könntest, die eine andere Lebensentscheidung getroffen hat — welche Entscheidung wäre es?": {
+    "label": "good",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Wer von euch würde am ehesten ein komplettes Doppelleben führen können, ohne dass es auffliegt?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "questions.json (seed)"
+  },
+  "Wenn du 10 Jahre in die Zukunft reisen könntest und nur eine einzige Sache über dein Leben erfahren dürftest — was würdest du wissen wollen?": {
+    "label": "good",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Was ist die größte Red Flag an dir, die du selbst kennst, aber einfach nicht änderst?": {
+    "label": "good",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Wer von euch wäre der bessere Cult Leader?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "questions.json (seed)"
+  },
+  "Teilt euch auf: Wer hat echte Prinzipien und wer biegt sich die Moral zurecht, wie es gerade passt?": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Wenn B einen Skandal hätte, der auf der Titelseite landet — was wäre die Schlagzeile?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Auf einer Skala von 1 bis 10, wie sehr ist A ein People Pleaser?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "questions.json (seed)"
+  },
+  "Teilt euch auf: Wer wäre bei der Mafia der Boss und wer der Verräter, der als Erstes zur Polizei rennt?": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Wenn du A's Tinder-Profil schreiben müsstest, aber brutal ehrlich — was steht drin?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Teilt euch auf: Wer hat Daddy Issues und wer hat Mommy Issues?": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Was ist A's toxic trait, den alle in der Gruppe kennen, aber keiner anspricht?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Teilt euch auf: Wer altert wie Wein und wer altert wie Milch?": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Wenn B's Lebensentscheidungen bisher ein Yelp-Review wären — wie viele Sterne und was steht in der Bewertung?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Wer von euch hat die meisten Red Flags, sieht aber von außen am normalsten aus?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "questions.json (seed)"
+  },
+  "Auf einer Skala von 1 bis 10, wie petty kann A werden, wenn er/sie sich ungerecht behandelt fühlt?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "questions.json (seed)"
+  },
+  "Wenn du B's Grabstein-Spruch schreiben müsstest — was steht drauf?": {
+    "label": "good",
+    "type": "FREITEXT",
+    "source": "questions.json (seed)"
+  },
+  "Teilt euch auf: Wer ist der Wolf und wer das Schaf in dieser Gruppe?": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Teilt euch auf: Wer lebt um zu arbeiten und wer arbeitet um zu leben?": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "questions.json (seed)"
+  },
+  "Sortiert die Gruppe: Wer hat die meisten Leute geghostet — von Serientäter bis treue Seele?": {
+    "label": "bad",
+    "type": "RANKING",
+    "source": "questions.json (seed)"
+  },
+  "Sortiert die Gruppe: Wer verträgt am meisten Alkohol — von Fass ohne Boden bis One-Beer-Wonder?": {
+    "label": "good",
+    "type": "RANKING",
+    "source": "questions.json (seed)"
+  },
+  "Sortiert die Gruppe danach, wen ihr als Erstes anruft, wenn ihr eine Leiche im Keller habt.": {
+    "label": "bad",
+    "type": "RANKING",
+    "source": "questions.json (seed)"
+  },
+  "Sortiert die Gruppe danach, wer am schlechtesten lügen kann — von Glasgesicht bis Profi-Bluffer.": {
+    "label": "good",
+    "type": "RANKING",
+    "source": "questions.json (seed)"
+  },
+  "Sortiert die Gruppe: Wer hat den besten Kleidungsstil — von Fashion Icon bis Jogginghosen-Leiche?": {
+    "label": "good",
+    "type": "RANKING",
+    "source": "questions.json (seed)"
+  },
+  "Sortiert die Gruppe danach, wer am ehesten mal viral geht — von Internet-Fame bis digitaler Geist.": {
+    "label": "good",
+    "type": "RANKING",
+    "source": "questions.json (seed)"
+  },
+  "Auf einer Skala von 1 bis 10, wie scary ist B wenn er/sie richtig wütend wird?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "questions.json (seed)"
+  },
+  "Wenn die Gruppe in einem Flugzeugabsturz strandet — wer übernimmt die Führung?": {
+    "label": "good",
+    "type": "POLL",
+    "source": "questions.json (seed)"
+  },
+  "Wenn A ein Warnschild tragen müsste — was stünde drauf?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Was ist die teuerste schlechte Entscheidung deines Lebens?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Wenn B ein NPC in einem Videospiel wäre — welcher Satz käme in Dauerschleife?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Welche Lüge erzählst du bei jedem Smalltalk, weil die Wahrheit zu anstrengend ist?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Wenn A morgen berühmt wird — wofür, und wie geht es schief?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Welches Hobby hast du voller Euphorie angefangen und nach maximal zwei Wochen beerdigt?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Wenn B eine Duftkerze wäre — wie heißt der Duft?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Was war dein absoluter Tiefpunkt in der Schulzeit?": {
+    "label": "good",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Wenn A die Hauptrolle in einer Sitcom spielt — was ist der Running Gag über ihn/sie?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Du darfst deinem 16-jährigen Ich genau fünf Wörter schicken — welche?": {
+    "label": "good",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Was ist das Unnötigste, das du je gekauft hast — und wie hast du es dir schöngeredet?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Wenn B ein Werbespot wäre — für welches Produkt und mit welchem Slogan?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Welchen Trend feiern alle, den du heimlich absolut nicht verstehst?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Was ist das Kindheits-Ding, das du bis heute heimlich machst?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04-2.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie gut würde A ein Polizeiverhör überstehen, ohne alles zu gestehen?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04-2.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie nachtragend ist B wirklich?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04-2.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie sehr würde A als Chef:in vom Team gefürchtet werden?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04-2.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie sehr hat B seine/ihre Finanzen im Griff?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04-2.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie wahrscheinlich verlässt A eines Tages spontan das Land ohne Vorwarnung?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04-2.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie schlecht kann B verlieren, wenn es um Gesellschaftsspiele geht?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04-2.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie geizig wird A, wenn die Rechnung geteilt werden soll?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04-2.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie dramatisch wird B bei einer leichten Erkältung?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04-2.json"
+  },
+  "Wer von euch scheitert bei 'Wer wird Millionär' schon an der 500-Euro-Frage?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "2026-07-04-2.json"
+  },
+  "Wessen Browserverlauf wäre am verstörendsten?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "2026-07-04-2.json"
+  },
+  "Wer von euch würde am ehesten heimlich zurück zum/zur Ex gehen?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "2026-07-04-2.json"
+  },
+  "Wer von euch wird im Alter der/die schrulligste Rentner:in?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "2026-07-04-2.json"
+  },
+  "Wer von euch würde am ehesten einen Podcast starten, den niemand hört?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "2026-07-04-2.json"
+  },
+  "Teilt euch auf: Wer kommt immer zu früh und wer grundsätzlich zu spät.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04-2.json"
+  },
+  "Teilt euch auf: Wer blüht beim Camping auf und wer bucht heimlich ein Hotel.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04-2.json"
+  },
+  "Teilt euch auf: Wer quatscht im Urlaub Fremde an und wer tut so, als spräche er/sie kein Englisch.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04-2.json"
+  },
+  "Teilt euch auf: Wer googelt Symptome und plant die Beerdigung, und wer geht nie zum Arzt.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04-2.json"
+  },
+  "Teilt euch auf: Wer schickt Sprachnachrichten in Podcast-Länge und wer antwortet nur mit 'ok'.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04-2.json"
+  },
+  "Teilt euch auf: Wer würde nach einem Lottogewinn weiterarbeiten und wer kündigt noch am Telefon.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04-2.json"
+  },
+  "Teilt euch auf: Wer bestellt seit 10 Jahren dasselbe beim Lieblingsitaliener und wer probiert immer was Neues.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04-2.json"
+  },
+  "Teilt euch auf: Wer stalkt neue Bekanntschaften bis zum Insta-Post von 2014 und wer googelt nicht mal den Namen.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04-2.json"
+  },
+  "Sortiert die Gruppe: Wer übersteht 3 Stunden Flugverspätung ohne Meltdown — von Zen-Meister bis Karen?": {
+    "label": "bad",
+    "type": "RANKING",
+    "source": "2026-07-04-2.json"
+  },
+  "Sortiert die Gruppe danach, wessen Handy-Bildschirmzeit am erschreckendsten wäre.": {
+    "label": "bad",
+    "type": "RANKING",
+    "source": "2026-07-04-2.json"
+  },
+  "Sortiert die Gruppe: Wer kommt in einer Talent-Show am weitesten — von Finale bis Buzzer nach 3 Sekunden?": {
+    "label": "bad",
+    "type": "RANKING",
+    "source": "2026-07-04-2.json"
+  },
+  "Sortiert die Gruppe danach, wer am ehesten wegen einer Kleinigkeit eine 1-Sterne-Google-Rezension schreibt.": {
+    "label": "bad",
+    "type": "RANKING",
+    "source": "2026-07-04-2.json"
+  },
+  "Wenn A eine Signature-Move beim Feiern hätte — was wäre es?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Was ist die dümmste Ausrede, die A je benutzt hat, um sich vor Verantwortung zu drücken?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Wenn B eine Reality-Show bekäme — wie würde sie heißen und worum ginge es?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Was ist ein Kompliment, das eigentlich eine Beleidigung ist, das du A schon mal gemacht hast?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Wenn du für einen Tag B's innere Stimme wärst — was würdest du ihm/ihr als Erstes sagen?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Was ist die peinlichste Nachricht, die noch in deinem Handy liegt und du hoffst, dass sie nie jemand sieht?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Wenn A's Ex ein Interview über ihn/sie geben würde — was wäre die erste Zeile?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Was ist ein Traum, den du hattest, den du nie jemandem erzählt hast, weil er zu creepy war?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Wenn B in einem Horrorfilm die erste Person wäre, die stirbt — was macht er/sie kurz davor falsch?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Was ist die unlogischste Angst, die du hast?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Wenn du A's Autobiografie in einem Satz zusammenfassen müsstest — wie würde er lauten?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Was würdest du sofort ändern, wenn du für einen Tag Diktator dieser Gruppe wärst?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Wenn B heimlich einen zweiten Job hätte, den niemand kennt — was wäre es?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Was ist das Letzte, worüber du heimlich geweint hast?": {
+    "label": "bad",
+    "type": "FREITEXT",
+    "source": "2026-07-04.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie sehr würde A in einer Reality-Dating-Show für Drama sorgen?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie überzeugend könnte B in einem Pyramidensystem rekrutieren?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie sehr würde A unter Druck in einer Prüfungssituation zusammenbrechen?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie viel Drama bringt B ungewollt in jede Gruppenchat-Diskussion?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie sehr overthinked A jede Nachricht, bevor er/sie sie abschickt?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie überzeugend könnte B als Trauzeuge/-in spontan eine Rede improvisieren?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie sehr würde A in einer WG-Küche für Chaos sorgen?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04.json"
+  },
+  "Auf einer Skala von 1 bis 10, wie schnell würde B unter Gruppenzwang seine/ihre Prinzipien über Bord werfen?": {
+    "label": "bad",
+    "type": "SKALA",
+    "source": "2026-07-04.json"
+  },
+  "Wer von euch könnte am ehesten eine ganze Woche ohne Handy überleben?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "2026-07-04.json"
+  },
+  "Wer von euch hätte am ehesten schon mal eine Verschwörungstheorie geglaubt, die offensichtlich falsch war?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "2026-07-04.json"
+  },
+  "Wessen Liebesleben würde die spannendste Netflix-Doku abgeben?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "2026-07-04.json"
+  },
+  "Wer von euch hat am ehesten einen geheimen Finsta, den niemand kennt?": {
+    "label": "bad",
+    "type": "POLL",
+    "source": "2026-07-04.json"
+  },
+  "Wer von euch würde als Erstes bei einer Bergwanderung aufgeben?": {
+    "label": "good",
+    "type": "POLL",
+    "source": "2026-07-04.json"
+  },
+  "Teilt euch auf: Wer plant jeden Urlaub bis ins Detail und wer bucht erst am Flughafen.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04.json"
+  },
+  "Teilt euch auf: Wer würde in einer Krise die Ruhe bewahren und wer dreht sofort durch.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04.json"
+  },
+  "Teilt euch auf: Wer gibt sein letztes Geld für Erlebnisse aus und wer für Dinge.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04.json"
+  },
+  "Teilt euch auf: Wer würde in einem Streit zuerst nachgeben und wer kämpft bis zum bitteren Ende.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04.json"
+  },
+  "Teilt euch auf: Wer liest die Nutzungsbedingungen wirklich und wer klickt einfach 'Akzeptieren'.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04.json"
+  },
+  "Teilt euch auf: Wer würde im Notfall zuerst die Polizei rufen und wer versucht es erstmal selbst zu regeln.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04.json"
+  },
+  "Teilt euch auf: Wer trainiert für die Bikini-Saison ab Januar und wer erst eine Woche vorher.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04.json"
+  },
+  "Teilt euch auf: Wer würde als Elternteil zu streng sein und wer viel zu locker.": {
+    "label": "bad",
+    "type": "TEAM_SPLIT",
+    "source": "2026-07-04.json"
+  },
+  "Sortiert die Gruppe danach, wer am ehesten einen Filmabend komplett verschläft.": {
+    "label": "bad",
+    "type": "RANKING",
+    "source": "2026-07-04.json"
+  },
+  "Sortiert die Gruppe: Wer würde am längsten in einem Escape Room feststecken — von Rätsel-Genie bis hoffnungslosem Fall?": {
+    "label": "bad",
+    "type": "RANKING",
+    "source": "2026-07-04.json"
+  },
+  "Sortiert die Gruppe danach, wer am meisten Zeit vorm Spiegel verbringt.": {
+    "label": "bad",
+    "type": "RANKING",
+    "source": "2026-07-04.json"
+  },
+  "Sortiert die Gruppe: Wer gibt am meisten Geld für Essen aus — von Sparfuchs bis Foodie ohne Limit?": {
+    "label": "bad",
+    "type": "RANKING",
+    "source": "2026-07-04.json"
+  }
+}

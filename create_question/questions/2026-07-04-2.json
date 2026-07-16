@@ -1,0 +1,178 @@
+[
+  {
+    "type": "FREITEXT",
+    "question": "Wenn A ein Warnschild tragen müsste — was stünde drauf?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist die teuerste schlechte Entscheidung deines Lebens?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn B ein NPC in einem Videospiel wäre — welcher Satz käme in Dauerschleife?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Welche Lüge erzählst du bei jedem Smalltalk, weil die Wahrheit zu anstrengend ist?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn A morgen berühmt wird — wofür, und wie geht es schief?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Welches Hobby hast du voller Euphorie angefangen und nach maximal zwei Wochen beerdigt?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn B eine Duftkerze wäre — wie heißt der Duft?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was war dein absoluter Tiefpunkt in der Schulzeit?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn A die Hauptrolle in einer Sitcom spielt — was ist der Running Gag über ihn/sie?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Du darfst deinem 16-jährigen Ich genau fünf Wörter schicken — welche?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist das Unnötigste, das du je gekauft hast — und wie hast du es dir schöngeredet?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Wenn B ein Werbespot wäre — für welches Produkt und mit welchem Slogan?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Welchen Trend feiern alle, den du heimlich absolut nicht verstehst?"
+  },
+  {
+    "type": "FREITEXT",
+    "question": "Was ist das Kindheits-Ding, das du bis heute heimlich machst?"
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie gut würde A ein Polizeiverhör überstehen, ohne alles zu gestehen?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie nachtragend ist B wirklich?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie sehr würde A als Chef:in vom Team gefürchtet werden?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie sehr hat B seine/ihre Finanzen im Griff?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie wahrscheinlich verlässt A eines Tages spontan das Land ohne Vorwarnung?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie schlecht kann B verlieren, wenn es um Gesellschaftsspiele geht?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie geizig wird A, wenn die Rechnung geteilt werden soll?",
+    "scale_max": 10
+  },
+  {
+    "type": "SKALA",
+    "question": "Auf einer Skala von 1 bis 10, wie dramatisch wird B bei einer leichten Erkältung?",
+    "scale_max": 10
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch scheitert bei 'Wer wird Millionär' schon an der 500-Euro-Frage?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wessen Browserverlauf wäre am verstörendsten?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch würde am ehesten heimlich zurück zum/zur Ex gehen?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch wird im Alter der/die schrulligste Rentner:in?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch würde am ehesten einen Podcast starten, den niemand hört?"
+  },
+  {
+    "type": "POLL",
+    "question": "Wer von euch heult am ehesten bei einem Tierfilm?"
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer kommt immer zu früh und wer grundsätzlich zu spät.",
+    "team_labels": ["Streber-Pünktlich", "Fashionably Late"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer blüht beim Camping auf und wer bucht heimlich ein Hotel.",
+    "team_labels": ["Bear Grylls", "Hotel-Mensch"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer quatscht im Urlaub Fremde an und wer tut so, als spräche er/sie kein Englisch.",
+    "team_labels": ["Social Butterfly", "Bitte nicht ansprechen"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer googelt Symptome und plant die Beerdigung, und wer geht nie zum Arzt.",
+    "team_labels": ["Dr. Google", "Bin gleich wieder fit"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer schickt Sprachnachrichten in Podcast-Länge und wer antwortet nur mit 'ok'.",
+    "team_labels": ["Podcast-Host", "Ok-Sender"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer würde nach einem Lottogewinn weiterarbeiten und wer kündigt noch am Telefon.",
+    "team_labels": ["Ehrenamts-Streber", "Sofort-Kündiger"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer bestellt seit 10 Jahren dasselbe beim Lieblingsitaliener und wer probiert immer was Neues.",
+    "team_labels": ["Nummer 42 wie immer", "Risiko-Esser"]
+  },
+  {
+    "type": "TEAM_SPLIT",
+    "question": "Teilt euch auf: Wer stalkt neue Bekanntschaften bis zum Insta-Post von 2014 und wer googelt nicht mal den Namen.",
+    "team_labels": ["FBI-Agent", "Null Recherche"]
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe: Wer übersteht 3 Stunden Flugverspätung ohne Meltdown — von Zen-Meister bis Karen?"
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wessen Handy-Bildschirmzeit am erschreckendsten wäre."
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe: Wer kommt in einer Talent-Show am weitesten — von Finale bis Buzzer nach 3 Sekunden?"
+  },
+  {
+    "type": "RANKING",
+    "question": "Sortiert die Gruppe danach, wer am ehesten wegen einer Kleinigkeit eine 1-Sterne-Google-Rezension schreibt."
+  }
+]
