@@ -107,10 +107,12 @@ export default function Comments({ questionId, memberId, initialComments }: Comm
                     className={`rounded-2xl px-3.5 py-2.5 ${
                       isOwn
                         ? "bg-accent/15 rounded-tr-sm"
-                        : "bg-background border border-card-border rounded-tl-sm"
+                        : "bg-orange/15 rounded-tl-sm"
                     }`}
                   >
-                    <p className="text-sm break-words">{comment.text}</p>
+                    <p className="text-base leading-snug break-words text-foreground/90">
+                      {comment.text}
+                    </p>
                   </div>
                   <span
                     className={`text-[11px] text-muted mt-1 block ${
